@@ -1,0 +1,781 @@
+*{margin: 0; padding: 0; box-sizing: border-box; text-decoration: none; font-family: 'S-CoreDream-3Light'}
+body{width: 100vw; overflow-x: hidden; background-color: #acbac1; font-size: 12px;}
+/* 에스코어 드림 */
+@font-face {
+    font-family: 'S-CoreDream-3Light';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* 카페24슈퍼매직 */
+@font-face {
+    font-family: 'Cafe24Supermagic-Bold-v1.0';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/Cafe24Supermagic-Bold-v1.0.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+/* 양진체 */
+@font-face {
+    font-family: '양진체';
+    src: url('https://fastly.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+section{overflow: hidden;}
+
+.openPc{display: block;}
+
+/* open section ----------------------------------------------------------------------------------------------------- */
+
+.opens{
+    width: 100vw; height: 100vh;
+    position: fixed; top: 0; left: 0;
+    z-index: 101; overflow: hidden;
+    background-color: #acbac1;
+    display: block; opacity: 1;
+    transition: 0.3s;
+}
+.opS{
+    width: 30rem; height: 30rem; border-radius: 100%; 
+    border: 1px solid #fdf0d5; position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+} 
+.opT{
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center; font-family: 'S-CoreDream-3Light';
+    font-size: 3.5rem; color: #fdf0d5; text-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.2);
+}
+.opT1{opacity: 0; transition: 0.3s;}
+.opT2{opacity: 0; transition: 0.3s;}
+.lode{margin-top: 2rem; font-size: 0.9rem;}
+
+/* header start ----------------------------------------------------------------------------------------- */
+.pcHeader{
+    width: 90%; height: 5.5rem; background-color: white;
+    position: fixed; z-index: 100; margin-top: 2rem;
+    left: 50%; transform: translateX(-50%);
+    border-radius: 2.2rem; box-shadow: 0px 0px 0.5rem rgba(0, 0, 0, 0.5);
+    display: flex;
+}
+.headLogo{
+    width: 8rem; height: 90%; position: relative;
+    left: 3rem; top: 55%; transform: translateY(-50%);
+}
+.headLogo a{width: 100%; height: 100%;}
+.headLogo img{width: 100%; height: 100%; object-fit: contain;}
+
+.headNav{
+    width: 70%; height: 90%; position: absolute;
+    right: 3rem; top: 60%; transform: translateY(-50%);
+    display: flex; justify-content: right;
+    align-items: center; gap: 1.5rem;
+}
+
+.headNav>div{
+    width: 5.5rem; height: 2rem; border-radius: 0.3rem;
+    display: flex; justify-content: center; align-items: center;
+}
+.headNav>div:hover{
+    transform: translate(-0.2rem,-0.2rem);
+    background-color: #6daae2; box-shadow: 0.2rem 0.2rem 0 #003049;
+}
+.headNav>div a{ 
+    width: 100%; height: 100%; 
+    display: flex; justify-content: center; align-items: center;
+    font-family: 'Cafe24Supermagic-Bold-v1.0'; color: black; 
+    font-size: 1rem;
+}
+.headNav>div:hover a{color: #fdf0d5;}
+
+/* bar ------------------------------------------------------------------------------------------------------------- */
+
+.barBox{
+    width: 3.5rem; height: 72%; transition: 0.3s; position: fixed;
+    top: 10rem; right: 4.5rem;
+    margin-left: 1rem; z-index: 10;
+    display: none; opacity: 0; justify-content: center;
+}
+.bar{
+    width: 50%; height: 100%; border-radius: 1.2rem; display: flex; justify-content: center;
+    background-color: white; margin: auto; position: relative; padding-top: 0.5rem;
+    box-shadow: 0px 0px 0.5rem rgba(0, 0, 0, 0.5);
+}
+.bar>div{width: 100%; height: 95%; display: flex; justify-content: center; position: relative;}
+.barTag{
+    position: absolute; height: 88%; top: 0; right: 0; writing-mode: sideways-rl;
+    display: flex; justify-content: space-between; margin-top: 0.3rem; font-size: 0.6rem;
+}
+.gages{
+    width: 80%; height: 0; background-color: #819faa; border-radius: 1.2rem;
+    position: absolute; bottom: 0;
+}
+.topBtn{
+    position: absolute; bottom: 0; left: 50%; transform: translateX(-50%) rotate(90deg);
+    width: 3.5rem; height: 3.5rem; border-radius: 1.2rem; display: flex; justify-content: center; align-items: center;
+    background-color: #003049; cursor: pointer;
+}
+.topBtn img {
+    width: 65%; height: 65%; object-fit: contain;
+}
+
+
+/* section 01 -------------------------------------------------------------------------------------------- */
+
+
+.mainp{
+    width: 100%; height: 100vh; position: relative;
+}
+
+.ani{
+    width: 0.1rem; height: 2rem; background-color: #003049; display: inline-block;
+    position: relative; top: 0.2rem;
+    animation: op 0.8s ease-in-out infinite;
+}
+
+@keyframes op {
+    0%{opacity: 0;}
+    50%{opacity: 1;}
+    70%{opacity: 0;}
+    100%{opacity: 0;}
+}
+
+.mafont{color: cadetblue; font-weight: 600;}
+
+.mainp>div{
+    width: 85%; height: 70%; position: relative;
+    margin: auto; top: 10rem; display: flex; justify-content: space-between;
+}
+.mainLbox{width: 90%; height: 100%; position: relative; align-content: center;  transition: 0.3s;}
+.lboxUn{
+    width: 50%; height: 96%; border-radius: 2.2rem;
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.25);
+    background: rgb(21,255,199); transition: 0.3s;
+    background: -moz-linear-gradient(90deg, rgba(21,255,199,1) 0%, rgba(58,81,206,1) 20%, rgba(51,153,204,1) 100%);
+    background: -webkit-linear-gradient(90deg, rgba(21,255,199,1) 0%, rgba(58,81,206,1) 20%, rgba(51,153,204,1) 100%);
+    background: linear-gradient(90deg, rgba(21,255,199,1) 0%, rgba(58,81,206,1) 20%, rgba(51,153,204,1) 100%);
+}
+.lboxUp{
+    width: 95%; height: 100%; background-color: #ffffff; 
+    border-radius: 2.2rem; box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
+    position: absolute; top: 0; right: 0;  transition: 0.3s; display: flex;
+    overflow: hidden;
+}
+.lboxUp>div:nth-child(1){
+    width: 2rem; height: 100%; position: relative; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+}
+.lboxUp>div:nth-child(1) img{width: 1.5rem; height: 2rem; object-fit: contain;}
+.lboxUp>div:nth-child(2){
+    font-family: 'S-CoreDream-3Light';
+    font-size: 2rem; position: relative;
+    flex: 1; height: 100%;
+}
+.lboxUp>div:nth-child(2)>div:nth-child(1){
+    position: absolute;
+    top: 4rem; left: 3.5rem;
+}
+.font1{
+    font-family: '양진체';
+}
+.myImg{
+    width: 23rem; height: 23rem; transition: 0.3s;
+    position: absolute; right: 4.5rem; bottom: 3.5rem;
+}
+.myImg img{width: 100%; height: 100%; object-fit: contain;}
+
+.myImg img:nth-child(1){display: block;}
+.myImg img:nth-child(2){display: none;}
+
+.myImg.on{
+    width: 10rem; height: 10rem; position: relative;
+    top: 10%; left: 50%; transform: translateX(-50%);
+}
+
+.aboutprofile{
+    display: none; position: relative;
+    width: 80%; margin: auto; margin-top: 5rem;
+    font-size: 1rem; overflow: hidden;
+}
+.lboxName{
+    font-size: 2rem; text-align: center; 
+    font-family: 'S-CoreDream-3Light'; padding-bottom: 0.1rem;
+    border-bottom: 0.1rem solid #6daae2;
+}
+.lboxName span{font-size: 1.2rem; font-family: 'S-CoreDream-3Light';}
+.aboutprofile>div:nth-child(2){color: #6daae2; font-size: 0.8rem; text-align: center; margin-bottom: 1rem;}
+.aboutprofile>div:nth-child(3){width: 90%; margin: auto; display: flex; flex-direction: column; gap: 1rem; }
+.aboutprofile>div:nth-child(3) p{font-family: 'Cafe24Supermagic-Bold-v1.0';}
+
+.mainRbox{width: 10%; height: 100%; position: relative;}
+.rboxUn{
+    width: 0; height: 96%; border-radius: 2.2rem 0 0 2.2rem;
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.25);
+    background-color: white; 
+    position: absolute; top: 50%; right: 2rem;
+    transform: translateY(-50%);
+    transition: 0.3s; overflow: hidden;
+}
+.rboxUn>div{transition: 0.3s; opacity: 0;}
+.rboxUn h1{
+    font-size: 2rem; display: block;
+    margin: 2.5rem 3rem; 
+}
+.proBox{
+    width: 80%; margin-left: 3rem; margin: auto;
+    display: flex; margin-top: 1rem;
+    position: relative; gap: 2rem;
+}
+
+.rboxUn h3{
+    font-size: 1.5rem;
+    font-family: 'Cafe24Supermagic-Bold-v1.0';
+}
+.rboxUn>div>div p{
+    margin: 0.5rem 0.5rem;
+}
+.proBox>div{
+    width: 45%; height: 8rem;
+}
+.logBox{
+    width: 80%; margin-left: 3rem; margin: auto; margin-top: 2rem;
+    position: relative;
+}
+.logBox>h3{display: block;}
+.linkBox{
+    position: relative; width: 100%;
+    display: flex; gap: 2rem; margin-top: 1rem;
+}
+.linkBox>div{
+    width: 40%; height: 7.5rem; border: 1px solid black;
+    margin-left: 0.5rem; border-radius: 2rem;
+}
+.archivingBox{display: flex; justify-content: center; align-items: center;}
+.archivingBox>a{width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; color: black;}
+.archivingBox>a>div:nth-child(1){width: 20%; height: 90%;}
+.logBoxIcon{width: 100%; object-fit:  100% contain;}
+.archivingBox>a>div:nth-child(2){width: 75%;  height: 90%;}
+.archivingBox>a>div:nth-child(2)>p{
+    width: 90%; height: 25%;
+    display: block; font-size: 1.2rem;padding-bottom: 1rem;
+    border-bottom: 0.1rem solid black; 
+}
+
+
+
+.rboxUp{
+    width: 3.5rem; height: 100%; 
+    cursor: pointer;
+    position: absolute; top: 0; right: 0;
+    background-color: white; border-radius: 2.2rem;
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
+    display: flex; flex-direction: column; align-items: center;
+}
+.arrowG{ width: 2rem; height: 2rem; position: relative; top: 1rem;}
+.arrowG img{width: 100%; height: 100%; object-fit: contain;}
+.logoG{width: 2rem; height: 8rem; position: relative; top: 1rem;}
+.logoG img{width: 100%; height: 100%; object-fit: contain;}
+.rBoxtxt{
+    width: 2rem; position: absolute; bottom: 1rem; writing-mode: sideways-rl;
+    font-family: 'Cafe24Supermagic-Bold-v1.0'; font-size: 0.8rem; color: #819faa;
+    text-align: center; align-content: center;
+}
+
+
+
+/* section 02 ------------------------------------------------------------------------------------------------- */
+.skillp{width: 100vw; overflow-x: hidden; height: 100vh;}
+.skillBox{
+    width: 78%; height: 70%; position: relative;
+    top: 10rem; left: 8rem; justify-items: center;
+}
+.skillNav{
+    width: 100%; height: 12%; background-color: #ffffff;
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
+    border-radius: 1.2rem; display: flex; justify-content: space-around; align-items: center;
+}
+
+.skillNav>div{
+    width: 6rem; height: 2rem; color: #819faa; cursor: pointer;
+    border: 0.15rem solid #819faa; border-radius: 0.8rem; font-size: 1rem;
+    text-align: center; align-content: center; font-family: 'Cafe24Supermagic-Bold-v1.0';
+    transition: 0.3s;
+}
+
+.skillNav>div:hover{border: 0.15rem solid #003049; color: #003049;}
+
+.skillNav>div.ons{
+    border: 0.15rem solid #003049; background-color: #003049; color: #fdf0d5;
+}
+
+.skillList{
+    width: 95%; height: 80%; margin-top: 2rem;
+    background-color: #003049;
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.25);
+    border-radius: 2.2rem; position: relative;
+}
+
+.skillList>div{
+    opacity: 0; transition: 0.3s; position: absolute; width: 100%; height: 100%;
+    display: flex; flex-direction: column; justify-content: start; align-items: center;
+    overflow: hidden;
+}
+.skillList>div.ons{opacity: 1;}
+
+.skillList>div>div{
+    width: 85%; height: 5rem; margin-top: 4rem; opacity: 0;
+    display: flex; justify-content: start; align-items: center; gap: 2rem;
+    transition: 0.3s;
+}
+.skillList>div>div:nth-child(1).ups{margin-top: 1.5rem; opacity: 1;}
+.skillList>div>div.ups{margin-top: 1.1rem; opacity: 1;}
+.listIcon{
+    width: 3.5rem; height: 3.5rem; background-color: #ffffff;
+    border-radius: 0.5rem; overflow: hidden; padding: 0.5rem;
+}
+.listIcon img{width: 100%; height: 100%; object-fit: contain;}
+
+.skillText {color: #ffffff; }
+.skillText>p:nth-child(1){
+    font-size: 1.2rem; font-family: 'Cafe24Supermagic-Bold-v1.0'; margin-bottom: 0.2rem;
+}
+
+
+/* section 03 ------------------------------------------------------------------------------------------------ */
+
+.projectp{width: 100vw; overflow-x: hidden; height: 100vh; display: flex;}
+.leftMenu{
+    width: 15%; height: 70%; position: relative;
+    top: 10rem; left: 8rem; justify-items: center;
+    background-color: white; border-radius: 2.2rem;
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
+}
+.leftMenu>div{
+    width: 95%; height: 12%; padding-bottom: 0.2rem; 
+    display: flex; align-items: end; justify-content: center;
+    border-bottom: 0.15rem solid #acbac1; font-size: 1.5rem;
+    font-family: 'Cafe24Supermagic-Bold-v1.0';
+}
+.leftMenu>button{
+    display: block; width: 90%; height: 7%; border: none;
+    align-content: end; padding-bottom: 0.2rem; font-size: 0.8rem;
+    margin-top: 0.3rem; border-bottom: 0.1rem solid #acbac1;
+    background-color: transparent; cursor: pointer;
+    font-family: 'Cafe24Supermagic-Bold-v1.0';
+}
+.leftMenu>button:hover{
+    color: #acbac1;
+}
+
+.projectBox{
+    width: 60%; height: 75%; position: relative;
+    top: 10rem; left: 10rem; justify-items: center;
+}
+.projectTop{
+    width: 100%; height: 8%; position: relative;
+    display: flex; align-items: center; margin-left: 2rem;
+}
+#closeProject{display: none; width: 2rem; height: 1.8rem; font-size: 1.5rem; cursor: pointer; font-family: 'Cafe24Supermagic-Bold-v1.0'; color: #003049;}
+#projectName{
+    font-family: 'Cafe24Supermagic-Bold-v1.0';
+    font-size: 1.5rem; color: #003049;
+}
+#projectres{
+    margin-left: 1rem; width: 60%; height: 1.8rem; border: 0.1rem solid #003049; padding: 0.5rem;
+    align-content: center; color: #003049;
+}
+.projectBot{
+    width: 100%; height: 85%; border: 0.1rem solid #003049; border-radius: 2.2rem;
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem;
+    align-items: center;
+    overflow-y: scroll; padding-top: 1.5rem; padding-bottom: 1.5rem;
+}
+/* 스크롤바 꾸미기 */
+.projectBot::-webkit-scrollbar{width: 0.7rem;}
+.projectBot::-webkit-scrollbar-thumb {
+    background: #002f4940; /* 스크롤바 색상 */
+    border-radius: 1rem; /* 스크롤바 둥근 테두리 */
+}
+.projectBot::-webkit-scrollbar-thumb:hover {
+    background: #003049; /* 스크롤바 색상 */
+}
+.projectBot::-webkit-scrollbar-track {
+    background: #002f4910;  /*스크롤바 뒷 배경 색상*/
+}
+
+.projectB{
+    width: 30%; height: 9rem; background-color: white; transition: 0.3s;
+    border-radius: 1rem; overflow: hidden; box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.25);
+    display: flex; justify-content: center; align-items: center; cursor: pointer;
+}
+.projectB img{width: 100%; height: 100%; object-fit:100% contain; transition: 0.3s; cursor: pointer;}
+.projectB img:hover{transform: scale(1.5);}
+#projectBox{display: none; background-color: #003049; align-content: center;}
+.imgflame{
+    width: 45%;
+    height: 80%;
+    overflow: hidden;
+    border-radius: 1.2rem;
+    position: relative;
+    background: #000;
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
+}
+.scrollimg{
+    width: 100%;
+    display: block;
+    position: absolute;
+    top: 0;
+    transition: transform 1s linear;
+}
+.rDiv{width: 45%; height: 80%; position: relative;}
+.rDiv>div:nth-child(1){
+    display: flex; align-items: end; padding-bottom: 1.5rem;
+}
+.rDiv>div:nth-child(1)>div:nth-child(1){
+    padding-right: 1rem; font-size: 1.7rem; font-family: 'Cafe24Supermagic-Bold-v1.0'; color: white;
+}
+.rDiv>div:nth-child(1)>div:nth-child(2){margin-bottom: 0.2rem; color: #ffffff;}
+.rDiv>div:nth-child(2){
+    width: 90%; color: #ffffff; font-size: 0.8rem;
+}
+.rDiv>div:nth-child(3){
+    width: 90%; bottom: 0; position: absolute;
+    display: flex; justify-content: space-between;
+}
+.rDiv>div:nth-child(3)>div{
+    width: 40%; height: 2.5rem; border-radius: 0.5rem;
+}
+.rDiv>div:nth-child(3)>div a{
+    width: 100%; height: 100%; display: block; text-align: center; align-content: center; transition: 0.3s;
+    border-radius: 0.7rem; border: 1px solid #acbac1; color: #acbac1; background-color: #acbac100;
+}
+.rDiv>div:nth-child(3)>div a:hover{background-color: #acbac1; color: #003049;}
+
+/* section 04----------------------------------------------------------------------- */
+.guestp{width: 100vw; overflow: hidden; height: 100vh;}
+
+
+
+/* 반응형 ---------------------------------------------------------------------------------------------------- */
+@media(min-width:1025px){
+    .openMob{display: none;}
+}
+@media (min-width:769px) and (max-width:1024px) {
+    .openMob{display: none;}
+}
+@media(max-width:768px){
+    .openPc{display: none;}
+
+    .openMob{
+        width: 100vw; overflow-x: hidden; background-color: #ffffff;
+    }
+
+/* open section ----------------------------------------------------------------------------------------------------- */
+
+.opensm{
+    width: 100vw; height: 100vh;
+    position: fixed; top: 0; left: 0;
+    z-index: 101; overflow: hidden;
+    background-color: #acbac1;
+    display: block; opacity: 1;
+    transition: 0.3s;
+}
+.opSm{
+    width: 20rem; height: 20rem; border-radius: 100%; 
+    border: 1px solid #fdf0d5; position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+} 
+.opTm{
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center; font-family: 'S-CoreDream-3Light';
+    font-size: 1.8rem; color: #fdf0d5; text-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.2);
+}
+.opT1m{opacity: 0; transition: 0.3s;}
+.opT2m{opacity: 0; transition: 0.3s;}
+.lodem{margin-top: 2rem; font-size: 0.5rem;}
+
+
+/* header */
+.appHeader{width: 100vw; height: 4.5rem; position: fixed; z-index: 10; background-color: #819faa; overflow-x: hidden;}
+.appHeader>div:nth-child(1){
+    width: 100%; height: 100%; position: absolute; display: flex; justify-content: center; align-items: center;
+}
+.appHeader>div:nth-child(1) img{
+    width: 45%; height: 50%; object-fit: contain;
+}
+.appHeader>div:nth-child(2){
+    width: 2rem; height: 2rem; position: absolute; top: 50%; transform: translateY(-50%); right: 1.5rem;
+}
+.appHeader>div:nth-child(2) img{
+    width: 100%; height: 100%; object-fit: cover;
+}
+
+.menuMo{width: 100%; height: 100%; position: fixed; top: 0; left: 50%; transform: translateX(-50%); z-index: 11; transition: 0.3s; display: none; opacity: 0; background-color: #00000075; }
+.barMo{width: 55%; height: 100%; background-color: #819faa; position: absolute; right: -60%; transition: 0.3s;}
+.barMo.mov{right: 0;}
+.topmenuMo{
+    width: 100%; height: 4rem; display: flex; justify-content: space-around;
+    align-items: end; padding-bottom: 0.5rem;
+}
+.topmenuMo>div{
+    height: 90%; display: block; align-content: end; color: #fdf0d5;
+    font-size: 2rem; font-family: 'Cafe24Supermagic-Bold-v1.0';
+}
+.topmenuMo>img{
+    width: 2rem; height: 2rem; object-fit: cover; display: block; transform: rotate(180deg);
+}
+.menulist{
+    width: 90%; margin: auto; margin-top: 1rem;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+}
+.menulist>a{
+    color: #fdf0d5; width: 90%; height: 2.5rem; font-size: 1rem; padding-left: 0.5rem;
+    display: block; border-bottom: 1px solid #fdf0d5; align-content: center;
+}
+
+/* section 01 */
+
+.mainBoxM{
+    width: 100vw; position: relative; top: 0; padding-bottom: 3rem;
+    overflow-x: hidden;
+}
+.aboutBox{width: 85%; position: relative; margin: auto; margin-top: 6rem;}
+.gomBox{
+    width: 100%; height: 15rem; position: relative; background-color: white;
+    border-radius: 1.5rem; box-shadow: 0 0 0.7rem rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+#goabout{
+    display: block; width: 100%; height: 3rem; background-color: #003049; position: absolute;
+    bottom: 0; font-size: 1.5rem; color: #fdf0d5; align-content: center; text-align: center;
+}
+.aboutBoxMo{
+    width: 90%; height: 0rem; margin: auto; background-color: #003049; overflow: hidden;
+    position: relative; transition: 0.3s; border-radius: 0 0 1.5rem 1.5rem;
+    box-shadow: 0 0 0.7rem rgba(0, 0, 0, 0.25);
+}
+#outabout{
+    display: block; width: 100%; height: 3rem; background-color: #acbac1; position: absolute;
+    bottom: 0; font-size: 1.5rem; color: #fdf0d5; align-content: center; text-align: center;
+    box-shadow: 0 0 0.7rem rgba(0, 0, 0, 0.25);
+}
+
+.gomBox>div:nth-child(1){
+    height: 12rem; width: 90%; 
+    position: relative; 
+}
+.fBox{
+    position: absolute; width: 100%; height: 100%;
+    display: block; opacity: 1; transition: 0.3s;
+}
+.ftxt{font-size: 1rem; margin: 1rem; position: relative;}
+.fimg{
+    position: absolute; display: block;
+    width: 40%; height: 10rem; object-fit: contain; 
+    right: -1rem; bottom: 0.3rem;
+}
+
+.sBox{
+    position: absolute; width: 100%; height: 100%;
+    display: none; opacity: 0; transition: 0.3s;
+}
+.sBox>div:nth-child(1){
+    width: 100%; height: 5.5rem; margin: 1.5rem 1.3rem;
+    display: flex; align-items: end;
+}
+.sBox>div:nth-child(1) img{
+    width: 5.5rem; height: 5.5rem; display: block;
+    object-fit: contain;
+}
+.sboxName{flex: 1; margin-left: 0.5rem;}
+.sboxName p{
+    font-size: 1.5rem;
+}
+.sboxName span{
+    font-size: 1rem;
+}
+.sboxName div{
+    font-size: 0.6rem; padding-bottom: 0.1rem; border-bottom: 1px solid #6daae2; color: #6daae2;
+}
+.sBox>div:nth-child(2){
+    margin-left: 1.5rem;
+}
+.sBoxgom{
+    display: block; position: absolute; width: 7.5rem; object-fit: cover;
+    right: -1rem;
+}
+.aboutBoxMo>div:nth-child(1){width: 90%; height: 12rem; margin: auto;}
+.aboutTit{font-size: 1.8rem; color: #fdf0d5; font-family: 'Cafe24Supermagic-Bold-v1.0'; margin-top: 0.5rem;}
+.aboutMo{width: 100%; display: flex; justify-content: space-between; color: #fdf0d5;}
+.aboutme>div{ font-size: 1.2rem; font-family: 'Cafe24Supermagic-Bold-v1.0';}
+.aboutme>p{ font-size: 0.6rem;}
+.archivingMo{width: 100%; height: 4rem; margin: 1.5rem auto; border: 0.1rem solid #fdf0d5; border-radius: 0.5rem;}
+.archivingMo>a{width: 100%; height: 100%; display: block; display: flex; align-items: center;}
+.archivingMo img{
+    width: 3rem; height: 3rem; object-fit: contain; display: block; margin-left: 1rem;
+}
+.archivingMo div{
+    font-size: 1.7rem; color: #fdf0d5; margin-left: 1rem;
+}
+
+/* section 02 */
+.skillBoxMo{
+    width: 100vw; height: 100vh; overflow-x: hidden;
+}
+.moTit{width: 85%; height: 10%; margin: auto; text-align: center; align-content: center; font-size: 2rem; font-family: 'Cafe24Supermagic-Bold-v1.0';}
+.skillBoxm {
+    width: 85%; height: 80%; position: relative;
+    display: flex; margin: auto; flex-direction: column;
+    justify-content: center; align-items: start;
+}
+
+.skillNavm {
+    width: 100%; height: 3rem; background-color: #ffffff;
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
+    border-radius: 1.2rem; display: flex; justify-content: space-around; align-items: center;
+}
+
+.skillNavm > div {
+    width: 4.5rem; height: 1.5rem; color: #819faa; cursor: pointer;
+    border: 0.15rem solid #819faa; border-radius: 0.8rem; font-size: 0.8rem;
+    text-align: center; display: flex; justify-content: center; align-items: center;
+    font-family: 'Cafe24Supermagic-Bold-v1.0'; transition: 0.3s;
+}
+
+.skillNavm > div:hover { border: 0.15rem solid #003049; color: #003049; }
+
+.skillNavm > div.ons {
+    border: 0.15rem solid #003049; background-color: #003049; color: #fdf0d5;
+}
+
+.skillListm {
+    width: 95%; height: 80%; margin-top: 2rem;
+    background-color: #003049;
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.25);
+    border-radius: 2.2rem; position: relative;
+    overflow: hidden;
+}
+
+.skillListm > div {
+    opacity: 0; transition: opacity 0.3s ease-in-out;
+    position: absolute; width: 100%; height: 100%;
+    display: flex; flex-direction: column; justify-content: start; align-items: center;
+}
+
+.skillListm > div.ons { opacity: 1; }
+
+.skillListm > div > div {
+    width: 85%; height: 5rem; margin-top: 4rem; opacity: 0;
+    display: flex; justify-content: start; align-items: center; gap: 2rem;
+    transition: margin-top 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.skillListm > div > div:nth-child(1).ups { margin-top: 1.5rem; opacity: 1; }
+.skillListm > div > div.ups { margin-top: 1.1rem; opacity: 1; }
+
+.listIconm {
+    width: 2.5rem; height: 2.5rem; background-color: #ffffff;
+    border-radius: 0.5rem; overflow: hidden; padding: 0.5rem;
+}
+
+.listIconm img { width: 100%; height: 100%; object-fit: contain; }
+
+.skillTextm { color: #ffffff; text-align: left; }
+
+.skillTextm > p:nth-child(1) {
+    font-size: 1.2rem; font-family: 'Cafe24Supermagic-Bold-v1.0'; margin-bottom: 0.2rem;
+}
+
+/* section 03 ---------------------------------------------------------------------------------------------------------- */
+.projectBoxMo{
+    width: 100vw; overflow-x: hidden; 
+}
+.projectOutbox{
+    width: 85%; margin: auto; padding-bottom: 1.5rem;
+    border-radius: 1rem; border: 1px solid #819faa;
+}
+.projectOutbox>div:nth-child(1){
+    font-size: 2rem; margin: 1.5rem;
+}
+.projectBoxs{
+    width: 90%; margin: auto; display: flex; flex-direction: column;
+    justify-content: start; align-items: center; gap: 1.5rem;
+}
+.box-container {
+    width: 100%;
+    height: 10rem;
+    perspective: 1000px; /* 3D 효과 */
+}
+
+.inBox {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s ease-in-out;
+    cursor: pointer; 
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.25);
+}
+
+.boxfront, .boxback {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    color: #fdf0d5
+}
+
+.boxfront {
+    background-color: white; 
+}
+.boxfront>img{
+    width: 100%; height: 100%; object-fit: 100% cover;
+}
+
+.boxback {
+    background-color: #819faa;
+    transform: rotateY(180deg);
+}
+
+.boxTop{
+    margin-left: 0.5rem;
+    font-size: 1.5rem; margin-top: 0.5rem;
+}
+.boxTop span{
+    margin-left: 0.5rem;
+    font-size: 1rem; font-family: 'Cafe24Supermagic-Bold-v1.0';
+}
+.boxMid>p:nth-child(1){
+    font-size: 0.8rem; margin-left: 0.5rem;
+}
+.boxMid>p:nth-child(2){
+    font-size: 0.6rem; margin-left: 0.5rem; margin-top: 0.5rem;
+}
+.goSite{
+    width: 6.5rem; height: 2rem; padding: 0.5rem;
+    border-radius: 0.5rem; border: 1px solid #fdf0d5;
+    position: absolute; right: 0.5rem; bottom: 0.5rem;
+}
+.goSite>a{
+    width: 100%; height: 100%; background-color: transparent; color: #fdf0d5; 
+    font-size: 0.6rem; align-content: center;
+}
+
+/* div 뒤집기 */
+.flipped {
+    transform: rotateY(180deg);
+}
+
+
+/* section 04----------------------------------------------------------------------- */
+.guestp{width: 100vw; overflow: hidden; height: 100vh; background-color: #ffffff;}
+
+
+
+}
+footer{width: 100%; height: 2rem;position: relative;}
