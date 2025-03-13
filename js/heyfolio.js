@@ -281,12 +281,12 @@ function projectShow(projectL){
         let projects = [
             { id:'moLmoL',name:'moLmoL',tags:'#HTML #CSS #Javascript #Jquery #PC',minit:'PC버전 / 향수 쇼핑몰',
                 text1:'다양한 종류의 향수를 판매하는 사이트 입니다.',text2:'javascript와 jquery를 주로 사용하였으며, 다양한 이벤트 구현에 중점을 두고 구현했습니다.css는 형지엘리트사 홈페이지를 참고 하였습니다.',
-                page:'../subProject/molmol/molmol.html',gitpage:'https//ddd',
+                page:'https://hanyisy.github.io/MolMol/',gitpage:'https//ddd',
                 img:'./img/molmolMainpages.png'
             },
             { id:'woodin',name:'WOODIN',tags:'#HTML #CSS #Javascript #반응형 #Grid',minit:'반응형 / 카피 사이트',
                 text1:'가구 브랜드 우딘의 사이트를 카피 하였습니다.',text2:'grid를 활용한 레이아웃과 반응형을 중점으로 두고 제작한 사이트로, 주로 css와 janascript를 중심으로 제작되었습니다.',
-                page:'../subProject/woodin/woodin.html',gitpage:'https//ddd',
+                page:'https://hanyisy.github.io/woodinCopypage/',gitpage:'https//ddd',
                 img:'./img/woodinPages.png'
             },
             { id:'onnuri',name:'OnNuri',tags:'#HTML #CSS #Javascript #Jquery #반응형 #팀프로젝트 #공공API #canvas',minit:'반응형 / 팀 프로젝트 / 한국 관광 사이트',
@@ -306,7 +306,7 @@ function projectShow(projectL){
             },
             { id:'relog',name:'Relog',tags:'#HTML #CSS #Javascript #반응형',minit:'반응형 / 여행정보 공유 및 관광 사이트',
                 text1:'여행기록을 올리거나 관련 상품 또는 서비스를 구매할 수 있는 사이트 입니다.',text2:'로그인 및 회원가입 페이지를 구연하였으며, css와 JavaScript 중점으로 구현하였습니다.',
-                page:'../subProject/relog/relog.html',gitpage:'https//ddd',
+                page:'https://hanyisy.github.io/reLog/',gitpage:'https//ddd',
                 img:'./img/relogPage.png'
             }
         ];
