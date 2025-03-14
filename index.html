@@ -617,5 +617,155 @@
         <!-- <div>이 홈페이지는 포트폴리오를 위해 제작되었습니다.</div> -->
     </footer>
     <script src="./js/heyfolio.js"></script>
+    <script>
+        //porject list
+function projectShow(projectL){
+    let projectBoxs = document.querySelectorAll('.projectB');
+    let projectLs = document.querySelectorAll(`#${projectL}`);
+    let projectName = document.querySelector('#projectName');
+    let projectres = document.querySelector('#projectres');
+    let closeProject = document.getElementById('closeProject');
+    let projectListBoxs = document.querySelector('#projectListBoxs');
+    let projectBox = document.getElementById('projectBox');
+    console.log(projectL)
+
+    closeProject.style.display='none';
+    projectListBoxs.style.display='flex';
+    projectBox.style.display='none';
+
+    projectBoxs.forEach(item=>{
+        item.style.opacity=0;
+        setTimeout(() => {
+            item.style.display='none'
+        }, 100);
+    })
+    
+
+    projectLs.forEach(item=>{
+        setTimeout(() => {
+            item.style.display='block';
+            setTimeout(() => {
+                item.style.opacity='1';
+            }, 100);
+        }, 200);
+    });
+
+    if(projectL=="all"){
+        projectBoxs.forEach(item=>{
+            setTimeout(() => {
+                item.style.display='block';
+                setTimeout(() => {
+                    item.style.opacity='1';
+                }, 100);
+            }, 200);
+        });
+        projectName.textContent='All Project';
+        projectres.textContent='모든 프로젝트 리스트 입니다.';
+    }else if(projectL=='personal'){
+        projectName.textContent='Personal Project';
+        projectres.textContent='개인 프로젝트 리스트 입니다.';
+    }else if(projectL=='team'){
+        projectName.textContent='Team Project';
+        projectres.textContent='팀 프로젝트 리스트 입니다.';
+    }else if(projectL=='mini'){
+        projectName.textContent='Mini Project';
+        projectres.textContent='작은 프로젝트들의 모음 입니다.';
+    }
+
+    $('#closeProject').click(()=>{
+        projectShow('all');
+    })
+
+    //porject Boxs
+    window.projectGo=function(project){
+        let closeProject = document.getElementById('closeProject');
+        let projectListBoxs = document.querySelector('#projectListBoxs');
+        let projectBox = document.getElementById('projectBox');
+        let projectName = document.querySelector('#projectName');
+        let projectres = document.querySelector('#projectres');
+        closeProject.style.display='block'
+        let projects = [
+            { id:'moLmoL',name:'moLmoL',tags:'#HTML #CSS #Javascript #Jquery #PC',minit:'PC버전 / 향수 쇼핑몰',
+                text1:'다양한 종류의 향수를 판매하는 사이트 입니다.',text2:'javascript와 jquery를 주로 사용하였으며, 다양한 이벤트 구현에 중점을 두고 구현했습니다.css는 형지엘리트사 홈페이지를 참고 하였습니다.',
+                page:'https://hanyisy.github.io/MolMol/',gitpage:'https//ddd',
+                img:'./img/molmolMainpages.png'
+            },
+            { id:'woodin',name:'WOODIN',tags:'#HTML #CSS #Javascript #반응형 #Grid',minit:'반응형 / 카피 사이트',
+                text1:'가구 브랜드 우딘의 사이트를 카피 하였습니다.',text2:'grid를 활용한 레이아웃과 반응형을 중점으로 두고 제작한 사이트로, 주로 css와 janascript를 중심으로 제작되었습니다.',
+                page:'https://hanyisy.github.io/woodinCopypage/',gitpage:'https//ddd',
+                img:'./img/woodinPages.png'
+            },
+            { id:'onnuri',name:'OnNuri',tags:'#HTML #CSS #Javascript #Jquery #반응형 #팀프로젝트 #공공API #canvas',minit:'반응형 / 팀 프로젝트 / 한국 관광 사이트',
+                text1:'한국의 사계절과 관광지등을 소개하는 홈페이지 입니다.',text2:'팀 프로젝트로 제작된 사이트입니다. 공공api와 canvas, git등을 활용하였으며 반응형과 api활용등을 중점으로 제작되었습니다.',
+                page:'https://sonjongmin1.github.io/TouristWebsite/index.html',gitpage:'https//ddd',
+                img:'./img/onnuriPage.png'
+            },
+            { id:'neulNeuru',name:'NeulNeuru',tags:'#HTML #CSS #Javascript #React #공공API',minit:'PC버전 / 도서 판매사이트',
+                text1:'도서 판매 홈페이지 입니다.',text2:'React에 중점을 두고 제작한 사이트로 sass를 함께 사용하였습니다.',
+                page:'https://hanyisy.github.io/books/',gitpage:'https//ddd',
+                img:'./img/neulPage.png'
+            },
+            { id:'weather',name:'weather Page',tags:'#HTML #CSS #Javascript #공공API',minit:'PC버전 / 날씨 및 기온 검색 페이지',
+                text1:'현재 날씨 및 기온을 확인할 수 있는 페이지 입니다.',text2:'공공API를 활용하여 실시간 기상 및 기온을 확인할수 있도록 했습니다. 검색창에 원하는 지역을 영어로 작성하여 검색하면 그 지역의 날씨 및 기온도 확인이 가능합니다.',
+                page:'https://hanyisy.github.io/study/weatherPage.html',gitpage:'https//ddd',
+                img:'./img/weatherPages.png'
+            },
+            { id:'relog',name:'Relog',tags:'#HTML #CSS #Javascript #반응형',minit:'반응형 / 여행정보 공유 및 관광 사이트',
+                text1:'여행기록을 올리거나 관련 상품 또는 서비스를 구매할 수 있는 사이트 입니다.',text2:'로그인 및 회원가입 페이지를 구연하였으며, css와 JavaScript 중점으로 구현하였습니다.',
+                page:'https://hanyisy.github.io/reLog/',gitpage:'https//ddd',
+                img:'./img/relogPage.png'
+            }
+        ];
+
+        projectListBoxs.style.display='none';
+        projectBox.style.display='flex';
+        projectBox.innerHTML='';
+
+        projects.forEach(item =>{
+            if(item.id == project){
+                //이미지 넣기+자동 스크롤 추가
+                let lDiv = document.createElement('div');
+                let limg = document.createElement('img');
+                lDiv.classList.add('imgflame');
+                limg.classList.add('scrollimg');
+                limg.src=item.img;
+
+                lDiv.addEventListener('mouseenter', () => {
+                    const scrollHeight = limg.scrollHeight - lDiv.clientHeight;
+                    limg.style.transform = `translateY(-${scrollHeight}px)`;
+                });
+        
+                lDiv.addEventListener('mouseleave', () => {
+                    limg.style.transform = `translateY(0)`;
+                });
+
+                //내용 넣기
+                let rDiv = document.createElement('div');//작업 가능 영역
+                let rTopDiv = document.createElement('div');
+                let rMidDiv = document.createElement('div');
+                let rBotDiv = document.createElement('div');
+
+                projectName.textContent=item.id;
+                projectres.textContent=item.tags;
+                rDiv.classList.add('rDiv');
+                rTopDiv.innerHTML=`<div>${item.name}</div><div>${item.minit}</div>`;
+                rMidDiv.innerHTML=`<div>${item.text1}</div><div>${item.text2}</div>`;
+                rBotDiv.innerHTML=`<div><a href="${item.page}" target="blank">홈페이지 ></div>`;
+                // rBotDiv.innerHTML=`<div><a href="${item.page}" target="blank">홈페이지 ></div><div><a href="${item.gitpage}" target="blank">GitHub ></div>`;
+
+
+                //소속 넣기
+                projectBox.appendChild(lDiv);
+                projectBox.appendChild(rDiv);
+                lDiv.appendChild(limg);
+                rDiv.appendChild(rTopDiv);
+                rDiv.appendChild(rMidDiv);
+                rDiv.appendChild(rBotDiv);
+            }
+        })
+    }
+
+}
+    </script>
 </body>
 </html>
