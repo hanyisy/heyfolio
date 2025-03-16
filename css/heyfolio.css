@@ -283,7 +283,7 @@ section{overflow: hidden;}
     font-family: 'Cafe24Supermagic-Bold-v1.0'; font-size: 0.8rem; color: #819faa;
     text-align: center; align-content: center;
 }
-
+.remo{z-index: 5;}
 
 
 /* section 02 ------------------------------------------------------------------------------------------------- */
