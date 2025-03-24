@@ -52,6 +52,7 @@ section{overflow: hidden;}
 .opT1{opacity: 0; transition: 0.3s;}
 .opT2{opacity: 0; transition: 0.3s;}
 .lode{margin-top: 2rem; font-size: 0.9rem;}
+.scrollp{width: 100vw; height: 100vh;}
 
 /* header start ----------------------------------------------------------------------------------------- */
 .pcHeader{
@@ -455,9 +456,38 @@ section{overflow: hidden;}
 .rDiv>div:nth-child(3)>div a:hover{background-color: #acbac1; color: #003049;}
 
 /* section 04----------------------------------------------------------------------- */
-.guestp{width: 100vw; overflow: hidden; height: 100vh;}
+.guestp{width: 100vw; height: 100vh; position: relative; overflow: hidden;}
+.guestp>iframe{
+    position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);
+    width: 100%; height: 100%; overflow: hidden;
+}
 
-
+/* footer -------------------------------------------------------------------------------------- */
+.contactp{
+    width: 100vw; height: 100vh; position: relative;
+}
+.contactBox{
+    width: 78%; height: 55%; position: relative;
+    top: 10rem; left: 8rem;
+    background-color: white; border-radius: 2.2rem;
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+.conTit{position: absolute; top: 2rem; left: 2rem; font-size: 2rem; font-weight: 500;}
+.conTxt{
+    height: 30%; width: 70%; z-index: 1;
+    position: absolute; bottom: 2rem; left: 2rem; display: flex; flex-direction: column; gap: 1.5rem;
+}
+.conGom{position: absolute; left: 0rem; top: 7rem; width: 80%; height: 90%;}
+.conGom>img{width: 180%; height: 250%; object-fit: contain;}
+.foot{
+    width: 80%; height: 15%; position: relative;
+    top: 10rem; left: 8rem;
+    background-color: white; margin-top: 2rem;
+    border-radius: 1.2rem;
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
+    text-align: center; align-content: center;
+}
 
 /* 반응형 ---------------------------------------------------------------------------------------------------- */
 @media(min-width:1025px){
@@ -465,6 +495,11 @@ section{overflow: hidden;}
 }
 @media (min-width:769px) and (max-width:1024px) {
     .openMob{display: none;}
+    .conTit{position: relative; top: 2rem; left: 2rem; font-size: 2rem; font-weight: 500;}
+    .conTxt{
+        height: 30%; width: 70%; z-index: 1;
+        position: relative; top: 2rem; left: 2rem; display: flex; flex-direction: column; gap: 1.5rem;
+    }
 }
 @media(max-width:768px){
     .openPc{display: none;}
@@ -775,7 +810,22 @@ section{overflow: hidden;}
 /* section 04----------------------------------------------------------------------- */
 .guestp{width: 100vw; overflow: hidden; height: 100vh; background-color: #ffffff;}
 
-
+/* section 05 --------------------- */
+.contactp{background-color: white;}
+.contactBox{
+    left: 50%; transform: translateX(-50%);
+    top: 7rem;
+}
+.foot{
+    left: 50%; transform: translateX(-50%);
+    top: 7rem;
+}
+.conTit{position: relative; top: 2rem; left: 2rem; font-size: 2rem; font-weight: 500;}
+.conTxt{
+    height: 30%; width: 70%; z-index: 1;
+    position: relative; top: 2rem; left: 2rem; display: flex; flex-direction: column; gap: 1rem;
+}
+.conGom{position: absolute; left: -5rem; top: 15rem; width: 80%; height: 90%;}
+.conGom>img{width: 180%; height: 200%; object-fit: contain;}
 
 }
-footer{width: 100%; height: 2rem;position: relative;}
