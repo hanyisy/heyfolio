@@ -714,9 +714,6 @@ function projectGo(project){
         let projectres = document.querySelector('#projectres');
 
         closeProject.style.display='block'
-        $(closeProject).click(()=>{
-        projectShow('all');
-        })
 
         let projects = [
             { id:'moLmoL',name:'moLmoL',tags:'#HTML #CSS #Javascript #Jquery #PC #Git',minit:'PC버전 / 향수 쇼핑몰',
@@ -801,6 +798,11 @@ function projectGo(project){
                 rDiv.appendChild(rTopDiv);
                 rDiv.appendChild(rMidDiv);
                 rDiv.appendChild(rBotDiv);
+
+                
+                $(closeProject).click(()=>{
+                projectShow('all');
+                })
             }
         })
     }
