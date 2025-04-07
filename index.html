@@ -799,10 +799,7 @@ function projectGo(project){
                 rDiv.appendChild(rMidDiv);
                 rDiv.appendChild(rBotDiv);
 
-                
-                $(closeProject).click(()=>{
-                projectShow('all');
-                })
+                closeProject.addEventListener('click',()=>{projectShow('all');});
             }
         })
     }
