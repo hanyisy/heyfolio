@@ -712,7 +712,12 @@ function projectGo(project){
         let projectBox = document.getElementById('projectBox');
         let projectName = document.querySelector('#projectName');
         let projectres = document.querySelector('#projectres');
+
         closeProject.style.display='block'
+        $(closeProject).click(()=>{
+        projectShow('all');
+        })
+
         let projects = [
             { id:'moLmoL',name:'moLmoL',tags:'#HTML #CSS #Javascript #Jquery #PC #Git',minit:'PC버전 / 향수 쇼핑몰',
                 text1:'다양한 종류의 향수를 판매하는 사이트 입니다.',text2:'<span class="boldT">javascript와 jquery</span>를 주로 사용하였으며, 다양한 이벤트 구현에 중점을 두고 구현했습니다.css는 형지엘리트사 홈페이지를 참고 하였습니다.',
