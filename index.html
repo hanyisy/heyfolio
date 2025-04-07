@@ -647,7 +647,8 @@
     <script src="./js/heyfolio.js"></script>
     <script>
         //porject list
-        let projectBoxs = document.querySelectorAll('.projectB');
+function projectShow(projectL){
+    let projectBoxs = document.querySelectorAll('.projectB');
     let projectLs = document.querySelectorAll(`#${projectL}`);
     let projectName = document.querySelector('#projectName');
     let projectres = document.querySelector('#projectres');
@@ -655,8 +656,6 @@
     let projectListBoxs = document.querySelector('#projectListBoxs');
     let projectBox = document.getElementById('projectBox');
     console.log(projectL)
-function projectShow(projectL){
-
 
     closeProject.style.display='none';
     projectListBoxs.style.display='flex';
