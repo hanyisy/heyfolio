@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="description" content="밝고, 성실하게! 프론트엔드 개발자 손혜인의 포트폴리오, HeyFolio">
     <meta name="theme-color" content="#eef2f4">
     <meta property="og:title" content="HeyFolio · 손혜인 포트폴리오">
@@ -69,14 +69,15 @@
         <section class="hero" id="home">
             <div class="container hero__grid">
                 <div class="hero__text">
-                    <p class="eyebrow">Frontend Developer · Portfolio</p>
+                    <p class="eyebrow">Frontend Developer · Son Hein</p>
                     <h1 class="hero__title">
-                        성실하고 <span class="hand">즐거운 마음</span>으로<br>
-                        개발하는 <em>프론트엔드 개발자</em>,<br>
-                        <strong>손혜인</strong>입니다.
+                        <span class="hand">즐겁게</span> 고민하고<br>
+                        성실하게 완성하는<br>
+                        <em>프론트엔드 개발자</em> <strong>손혜인</strong>입니다.
                     </h1>
+                    <p class="hero__lead">시각디자인을 공부한 감각으로, 보기 좋고 쓰기 편한 화면을 만듭니다.</p>
                     <p class="hero__keyword">
-                        <span>나를 표현하는 단어</span>
+                        <span>저를 한 단어로 표현하면</span>
                         <span class="typing" id="typing" aria-hidden="true">#성실</span>
                         <span class="sr-only">#성실 #책임감 #적극적 #활발한 #긍정적</span>
                     </p>
@@ -119,7 +120,7 @@
                         <p class="eyebrow">01 · About</p>
                         <h2>About Me</h2>
                     </div>
-                    <p class="section__desc">밝은 에너지와 성실함으로, 보기 좋고 쓰기 편한 화면을 만들고 싶은 개발자입니다.</p>
+                    <p class="section__desc">디자인고에서 시각디자인을, 학원에서 풀스택 개발을 배웠어요. 디자인과 개발 사이를 잇는 개발자가 되고 싶어요.</p>
                 </header>
 
                 <div class="bento">
@@ -182,7 +183,7 @@
                         <p class="eyebrow">02 · Skill</p>
                         <h2>Skill</h2>
                     </div>
-                    <p class="section__desc">탭을 눌러 분야별 기술을 확인해 보세요.</p>
+                    <p class="section__desc">디자인 툴부터 프론트엔드, 백엔드까지 직접 써 본 기술들이에요.</p>
                 </header>
                 <div class="seg reveal" role="tablist" aria-label="스킬 분류" id="skillTabs"></div>
                 <div class="skill-grid" id="skillGrid" role="tabpanel"></div>
@@ -197,10 +198,15 @@
                         <p class="eyebrow">03 · Project</p>
                         <h2>Project</h2>
                     </div>
-                    <p class="section__desc">카드를 누르면 상세 내용과 전체 화면 미리보기를 볼 수 있어요.</p>
+                    <p class="section__desc">개인·팀 프로젝트로 만든 작업물이에요. 카드를 누르면 전체 화면을 볼 수 있어요.</p>
                 </header>
                 <div class="seg reveal" role="group" aria-label="프로젝트 분류" id="projectFilters"></div>
                 <div class="project-grid" id="projectGrid"></div>
+                <div class="carousel-status" aria-hidden="true">
+                    <span id="projectCount">1 / 8</span>
+                    <span class="carousel-status__bar"><i id="projectBar"></i></span>
+                    <span>밀어서 보기 →</span>
+                </div>
             </div>
         </section>
 
@@ -212,7 +218,7 @@
                         <p class="eyebrow">04 · Guestbook</p>
                         <h2>Guestbook</h2>
                     </div>
-                    <p class="section__desc">따뜻한 한마디를 남겨주시면 큰 힘이 됩니다!</p>
+                    <p class="section__desc">다녀가신 흔적을 남겨주세요. 따뜻한 한마디가 큰 힘이 돼요!</p>
                 </header>
                 <div class="card guest reveal">
                     <iframe src="https://storage.googleapis.com/guest_border/index4.html" title="방명록" loading="lazy"></iframe>
@@ -226,8 +232,8 @@
                 <div class="card contact reveal">
                     <div class="contact__text">
                         <p class="eyebrow">05 · Contact</p>
-                        <h2>여기까지 스크롤 해주셔서<br>감사합니다!</h2>
-                        <p>새로운 기회와 협업을 언제나 환영합니다. 궁금한 점이 있으시거나 함께할 프로젝트가 있다면 언제든지 연락 주세요.</p>
+                        <h2>함께 일할 기회를<br>기다리고 있어요!</h2>
+                        <p>끝까지 봐주셔서 감사합니다. 새로운 기회와 협업은 언제나 환영이에요. 궁금한 점이나 함께할 프로젝트가 있다면 편하게 연락 주세요.</p>
                         <div class="contact__actions">
                             <a class="btn btn--primary" href="mailto:heineyee@naver.com">📩 heineyee@naver.com</a>
                             <button type="button" class="btn btn--ghost" id="copyEmail" data-email="heineyee@naver.com">이메일 복사</button>
@@ -248,6 +254,30 @@
     </footer>
 
     <button type="button" class="to-top" id="toTop" aria-label="맨 위로 가기">↑</button>
+
+    <!-- 모바일 하단 탭바 -->
+    <nav class="tabbar" id="tabbar" aria-label="모바일 메뉴">
+        <a href="#home">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5V19a1 1 0 0 1-1 1h-4.5v-5.5h-5V20H5a1 1 0 0 1-1-1z"/></svg>
+            <span>Home</span>
+        </a>
+        <a href="#about">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20c.8-3.8 3.8-6 7.5-6s6.7 2.2 7.5 6"/></svg>
+            <span>About</span>
+        </a>
+        <a href="#skill">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8.5 8-4 4 4 4M15.5 8l4 4-4 4M13.5 5.5l-3 13"/></svg>
+            <span>Skill</span>
+        </a>
+        <a href="#project">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="7" height="7" rx="2"/><rect x="13" y="13" width="7" height="7" rx="2"/></svg>
+            <span>Project</span>
+        </a>
+        <a href="#contact" data-match="guestbook contact">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="2.5"/><path d="m4.5 7 7.5 6 7.5-6"/></svg>
+            <span>Contact</span>
+        </a>
+    </nav>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
     <!-- 프로젝트 상세 모달 -->

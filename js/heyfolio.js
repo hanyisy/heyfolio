@@ -97,12 +97,16 @@
         document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
         document.addEventListener('click', (e) => { if (!e.target.closest('#header')) setOpen(false); });
 
-        const sections = links.map((a) => $(a.getAttribute('href'))).filter(Boolean);
+        // 상단 메뉴 + 모바일 탭바 (data-match: 함께 활성화할 섹션 id)
+        const allLinks = [...links, ...$$('#tabbar a')];
+        const matchOf = (a) => (a.dataset.match || a.getAttribute('href').slice(1)).split(' ');
+        const ids = [...new Set(allLinks.flatMap(matchOf))];
+        const sections = ids.map((id) => document.getElementById(id)).filter(Boolean);
         const io = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (!entry.isIntersecting) return;
-                links.forEach((a) => {
-                    const on = a.getAttribute('href') === `#${entry.target.id}`;
+                allLinks.forEach((a) => {
+                    const on = matchOf(a).includes(entry.target.id);
                     a.classList.toggle('is-active', on);
                     if (on) a.setAttribute('aria-current', 'true');
                     else a.removeAttribute('aria-current');
@@ -185,13 +189,25 @@
             grid.innerHTML = list.map((s, i) => `
                 <article class="skill-card" style="--i:${i}">
                     <div class="skill-card__icon"><img src="${s.icon}" alt="" loading="lazy"></div>
-                    <div>
+                    <div class="skill-card__text">
                         <span class="skill-card__group">${groupLabel[s.group]}</span>
                         <h3>${s.name}</h3>
-                        <p>${s.desc}</p>
+                        <p class="skill-card__short">${s.short}</p>
+                        <p class="skill-card__desc" id="skill-desc-${i}">${s.desc}</p>
                     </div>
+                    <button type="button" class="skill-card__more" aria-expanded="false"
+                        aria-controls="skill-desc-${i}" aria-label="${s.name} 자세히 보기"></button>
                 </article>`).join('');
         };
+
+        // 모바일: 타일을 누르면 자세한 설명 펼치기
+        grid.addEventListener('click', (e) => {
+            const btn = e.target.closest('.skill-card__more');
+            if (!btn) return;
+            const open = btn.getAttribute('aria-expanded') !== 'true';
+            btn.setAttribute('aria-expanded', open);
+            btn.closest('.skill-card').classList.toggle('is-open', open);
+        });
 
         const select = (btn) => {
             $$('.seg__btn', tabs).forEach((b) => {
@@ -261,7 +277,30 @@
                         </span>
                     </button>
                 </article>`).join('');
+            grid.scrollLeft = 0;
+            updateStatus();
         };
+
+        // 모바일 캐러셀: 현재 위치 표시
+        const count = $('#projectCount');
+        const bar = $('#projectBar');
+        const updateStatus = () => {
+            const first = grid.firstElementChild;
+            if (!first) return;
+            const step = first.offsetWidth + parseFloat(getComputedStyle(grid).columnGap || 0);
+            const atEnd = grid.scrollLeft >= grid.scrollWidth - grid.clientWidth - 2;
+            const i = atEnd && grid.scrollLeft > 0
+                ? current.length - 1
+                : Math.min(Math.round(grid.scrollLeft / step), current.length - 1);
+            count.textContent = `${i + 1} / ${current.length}`;
+            bar.style.width = `${((i + 1) / current.length) * 100}%`;
+        };
+        let statusTicking = false;
+        grid.addEventListener('scroll', () => {
+            if (statusTicking) return;
+            statusTicking = true;
+            requestAnimationFrame(() => { updateStatus(); statusTicking = false; });
+        }, { passive: true });
 
         filters.addEventListener('click', (e) => {
             const btn = e.target.closest('.seg__btn');
