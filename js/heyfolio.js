@@ -1,485 +1,402 @@
-document.addEventListener("DOMContentLoaded", function () {
-    // open site ani
-    let opens = document.querySelector('.opens');
-    let opensm = document.querySelector('.opensm');
-    let loadingText = document.querySelector('.lode');
-    let loadingText2 = document.querySelector('.lodem');
+/* =========================================================
+   HeyFolio v2 — 인터랙션
+   콘텐츠(스킬·프로젝트)는 js/data.js 에서 수정하세요.
+   ========================================================= */
+(() => {
+    'use strict';
 
-    if (!opens || !loadingText) {
-        console.error("로드할 요소를 찾을 수 없습니다.");
-        return;
+    const $ = (sel, el = document) => el.querySelector(sel);
+    const $$ = (sel, el = document) => [...el.querySelectorAll(sel)];
+    const root = document.documentElement;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const canHover = window.matchMedia('(hover: hover)').matches;
+    const easeOut = (t) => 1 - Math.pow(1 - t, 3);
+    const { keywords, skillGroups, skills, projectTypes, projects } = HEYFOLIO;
+
+    // 인트로 로딩 화면 (세션당 한 번만 노출)
+    function initIntro() {
+        const intro = $('#intro');
+        if (!intro) return;
+        if (root.classList.contains('intro-seen')) { intro.remove(); return; }
+
+        const count = $('#introCount');
+        const duration = 1600;
+        let start = null;
+        let finished = false;
+
+        const finish = () => {
+            if (finished) return;
+            finished = true;
+            count.textContent = '100';
+            intro.classList.add('is-done');
+            try { sessionStorage.setItem('heyfolio-intro', '1'); } catch (e) {}
+            setTimeout(() => {
+                root.classList.add('intro-seen');
+                intro.remove();
+            }, 700);
+        };
+
+        const tick = (time) => {
+            if (finished) return;
+            if (start === null) start = time;
+            const p = Math.min((time - start) / duration, 1);
+            count.textContent = Math.round(easeOut(p) * 100);
+            if (p < 1) requestAnimationFrame(tick);
+            else setTimeout(finish, 400);
+        };
+        requestAnimationFrame(tick);
+
+        // 클릭하거나 키를 누르면 바로 건너뛰기
+        intro.addEventListener('click', finish);
+        document.addEventListener('keydown', finish, { once: true });
     }
 
-    setTimeout(() => {
-        document.querySelector('.opT1').style.opacity = 1;
-        setTimeout(() => {
-            document.querySelector('.opT2').style.opacity = 1;
-        }, 1000);
-        document.querySelector('.opT1m').style.opacity = 1;
-        setTimeout(() => {
-            document.querySelector('.opT2m').style.opacity = 1;
-        }, 1000);
-    }, 200);
+    // 헤더 그림자 · 진행바 · 맨 위로 버튼
+    function initScroll() {
+        const header = $('#header');
+        const bar = $('#progressBar');
+        const toTop = $('#toTop');
+        let ticking = false;
 
-    for (let i = 0; i <= 100; i++) {
-        setTimeout(() => {
-            loadingText.innerHTML = "LOADING .... " + i + "%";
-            loadingText2.innerHTML = "LOADING .... " + i + "%";
-        }, i * 35);
-    }
+        const update = () => {
+            const y = window.scrollY;
+            const max = root.scrollHeight - window.innerHeight;
+            header.classList.toggle('is-scrolled', y > 10);
+            bar.style.transform = `scaleX(${max > 0 ? y / max : 0})`;
+            toTop.classList.toggle('is-show', y > window.innerHeight * 0.6);
+            ticking = false;
+        };
 
-    setTimeout(() => {
-        setTimeout(() => {
-            opens.style.display = "none";
-            opensm.style.display = "none";
-        }, 500);
-        window.scrollTo({ top: 0 });
-        opens.style.opacity = 0;
-        openm.style.opacity = 0;
-    }, 4000);
-});
-
-
-// 페이지 스크롤
-document.addEventListener("wheel", (event) => {
-    event.preventDefault(); // 기본 스크롤 방지
-    const sections = document.querySelectorAll(".scrollp");
-    let pagesIndex = Math.round(window.scrollY / window.innerHeight);
-
-    if (sections.length === 0) {
-        console.error("섹션을 찾을 수 없습니다.");
-        return;
-    }
-
-    if (event.deltaY > 0) {
-        // 아래로 스크롤
-        if (pagesIndex < sections.length - 1) {
-            window.scrollTo({ 
-                top: (pagesIndex + 1) * window.innerHeight, 
-                behavior: "smooth" 
-            });
-        }
-    } else {
-        // 위로 스크롤
-        if (pagesIndex > 0) {
-            window.scrollTo({ 
-                top: (pagesIndex - 1) * window.innerHeight, 
-                behavior: "smooth" 
-            });
-        }
-    }
-}, { passive: false });
-
-//top 버튼
-document.querySelector('.topBtn').addEventListener('click',function(){
-    window.scrollTo({ 
-        top: 0, 
-        behavior: "smooth" 
-    });
-})
-
-//gagebar
-document.addEventListener("scroll", function () {
-    let barBox = document.querySelector(".barBox");
-    let gages = document.querySelector(".gages");
-
-    if (!barBox || !gages) return;
-
-    let scrollTop = window.scrollY;
-    let windowHeight = window.innerHeight;
-    let totalHeight = document.body.scrollHeight - windowHeight;
-
-    if (scrollTop >= windowHeight) {
-        barBox.style.display = "block";
-        setTimeout(() => {
-            barBox.style.opacity = 1;
-        }, 100);
-    } else {
-        barBox.style.display = "none";
-        barBox.style.opacity = 0;
-    }
-
-    let scrollPercentage = (scrollTop / totalHeight) * 100;
-    gages.style.height = scrollPercentage + "%";
-});
-
-
-
-// about page
-let moveAbout = document.querySelectorAll(".moveAbout");
-
-let mainLbox = document.querySelector('.mainLbox');
-let mainRbox = document.querySelector('.mainRbox')
-let lboxUn = document.querySelector('.lboxUn');
-let lboxUp = document.querySelector('.lboxUp');
-let rboxUn = document.querySelector('.rboxUn');
-let myImg = document.querySelector('.myImg');
-let myImg1 = document.getElementById('myimg1');
-let myImg2 = document.getElementById('myimg2');
-
-let remo = document.querySelector('.remo');
-let logBox = document.querySelectorAll('.rboxUn>div');
-
-let aboutB =false;
-
-let aboutprofile =document.querySelector('.aboutprofile');
-
-moveAbout.forEach(function(element) {
-    element.addEventListener("click", function() {
-        if(!aboutB){
-            aboutB=true;
-            mainLbox.style.width='30%';
-            mainRbox.style.width='65%';
-            rboxUn.style.width='95%';
-            myImg.classList.add('on');
-            myImg1.style.display='none';
-            myImg2.style.display='block';
-            remo.style.display='none';
-            aboutprofile.style.display='block';
-            for(let i=0; i<logBox.length;i++){
-                setTimeout(() => {
-                    logBox[i].style.opacity='1';
-                }, (i+1)*300);
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                ticking = true;
+                requestAnimationFrame(update);
             }
-        }else{
-            aboutB=false;
-            logBox.forEach(item => {
-                item.style.opacity="0";
+        }, { passive: true });
+        update();
+
+        toTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+        });
+    }
+
+    // 메뉴 (모바일 토글 + 현재 섹션 표시)
+    function initNav() {
+        const nav = $('#nav');
+        const btn = $('#menuToggle');
+        const links = $$('a', nav);
+
+        const setOpen = (open) => {
+            nav.classList.toggle('is-open', open);
+            btn.setAttribute('aria-expanded', open);
+            btn.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
+        };
+
+        btn.addEventListener('click', () => setOpen(!nav.classList.contains('is-open')));
+        links.forEach((a) => a.addEventListener('click', () => setOpen(false)));
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
+        document.addEventListener('click', (e) => { if (!e.target.closest('#header')) setOpen(false); });
+
+        const sections = links.map((a) => $(a.getAttribute('href'))).filter(Boolean);
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                links.forEach((a) => {
+                    const on = a.getAttribute('href') === `#${entry.target.id}`;
+                    a.classList.toggle('is-active', on);
+                    if (on) a.setAttribute('aria-current', 'true');
+                    else a.removeAttribute('aria-current');
+                });
             });
-            mainLbox.style.width='90%';
-            mainRbox.style.width='10%';
-            rboxUn.style.width='0%';
-            myImg.classList.remove('on');
-            myImg1.style.display='block';
-            myImg2.style.display='none';
-            remo.style.display='block';
-            aboutprofile.style.display='none';
+        }, { rootMargin: '-45% 0px -50% 0px' });
+        sections.forEach((s) => io.observe(s));
+    }
+
+    // 다크 모드
+    function initTheme() {
+        const btn = $('#themeToggle');
+        const meta = $('meta[name="theme-color"]');
+
+        const apply = (theme) => {
+            root.dataset.theme = theme;
+            btn.setAttribute('aria-label', theme === 'dark' ? '라이트 모드로 전환' : '다크 모드로 전환');
+            meta.content = theme === 'dark' ? '#0a1822' : '#eef2f4';
+        };
+        apply(root.dataset.theme === 'dark' ? 'dark' : 'light');
+
+        btn.addEventListener('click', () => {
+            const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+            apply(next);
+            try { localStorage.setItem('heyfolio-theme', next); } catch (e) {}
+        });
+    }
+
+    // 히어로 키워드 타이핑
+    function initTyping() {
+        const el = $('#typing');
+        if (!el) return;
+        let i = 0;
+
+        if (reduceMotion) {
+            setInterval(() => {
+                i = (i + 1) % keywords.length;
+                el.textContent = `#${keywords[i]}`;
+            }, 2200);
+            return;
         }
-    });
-});
 
-document.querySelector('.homes').addEventListener("click", function() {
-    aboutB=false;
-    mainLbox.style.width='90%';
-    mainRbox.style.width='10%';
-    rboxUn.style.width='0%';
-    remo.style.display='block';
-    myImg1.style.display='block';
-    myImg2.style.display='none';
-    myImg.classList.remove('on');
-    aboutprofile.style.display='none';
-});
+        let text = '';
+        let deleting = false;
+        const loop = () => {
+            const word = `#${keywords[i]}`;
+            text = deleting ? word.slice(0, text.length - 1) : word.slice(0, text.length + 1);
+            el.textContent = text;
 
+            let delay = deleting ? 70 : 150;
+            if (!deleting && text === word) {
+                delay = 1600;
+                deleting = true;
+            } else if (deleting && text === '') {
+                deleting = false;
+                i = (i + 1) % keywords.length;
+                delay = 300;
+            }
+            setTimeout(loop, delay);
+        };
+        loop();
+    }
 
+    // 스킬 탭
+    function initSkills() {
+        const tabs = $('#skillTabs');
+        const grid = $('#skillGrid');
+        const groupLabel = Object.fromEntries(skillGroups.map((g) => [g.id, g.label]));
 
-//click keyword
+        tabs.innerHTML = skillGroups.map((g, idx) => {
+            const n = g.id === 'all' ? skills.length : skills.filter((s) => s.group === g.id).length;
+            return `<button type="button" class="seg__btn" role="tab" id="tab-${g.id}"
+                aria-selected="${idx === 0}" aria-controls="skillGrid" tabindex="${idx === 0 ? 0 : -1}"
+                data-group="${g.id}">${g.label}<span class="seg__count">${n}</span></button>`;
+        }).join('');
 
+        const render = (group) => {
+            const list = group === 'all' ? skills : skills.filter((s) => s.group === group);
+            grid.setAttribute('aria-labelledby', `tab-${group}`);
+            grid.innerHTML = list.map((s, i) => `
+                <article class="skill-card" style="--i:${i}">
+                    <div class="skill-card__icon"><img src="${s.icon}" alt="" loading="lazy"></div>
+                    <div>
+                        <span class="skill-card__group">${groupLabel[s.group]}</span>
+                        <h3>${s.name}</h3>
+                        <p>${s.desc}</p>
+                    </div>
+                </article>`).join('');
+        };
 
-function shows(id) {
-    let skillbtn = document.querySelectorAll('.skillNav>div'); // 상단 버튼들
-    let skillList = document.querySelectorAll('.skillList>div'); // 전체 리스트
-    let ids = document.getElementById(id); // 클릭한 리스트의 ID 가져오기
+        const select = (btn) => {
+            $$('.seg__btn', tabs).forEach((b) => {
+                const on = b === btn;
+                b.setAttribute('aria-selected', on);
+                b.tabIndex = on ? 0 : -1;
+            });
+            render(btn.dataset.group);
+        };
 
-    // 모든 버튼에서 'ons' 제거 후 클릭한 버튼에 추가
-    skillbtn.forEach(item => item.classList.remove("ons"));
-    document.querySelector(`[onclick="shows('${id}')"]`).classList.add("ons");
-
-    // 모든 리스트에서 'ons' 제거하여 숨김 처리
-    skillList.forEach(item => {
-        item.classList.remove('ons');
-        item.querySelectorAll('div').forEach(skill => {
-            skill.classList.remove('ups'); // 모든 리스트 아이템 초기화
+        tabs.addEventListener('click', (e) => {
+            const btn = e.target.closest('.seg__btn');
+            if (btn) select(btn);
         });
-    });
 
-    // 선택된 리스트만 보이도록 설정
-    if (ids) {
-        ids.classList.add("ons"); // 리스트 보이기
+        // 방향키로 탭 이동
+        tabs.addEventListener('keydown', (e) => {
+            const btns = $$('.seg__btn', tabs);
+            const idx = btns.indexOf(document.activeElement);
+            if (idx < 0) return;
+            const keyMap = {
+                ArrowRight: btns[(idx + 1) % btns.length],
+                ArrowLeft: btns[(idx - 1 + btns.length) % btns.length],
+                Home: btns[0],
+                End: btns[btns.length - 1]
+            };
+            const next = keyMap[e.key];
+            if (!next) return;
+            e.preventDefault();
+            next.focus();
+            select(next);
+        });
 
-        // 리스트 안의 개별 항목들을 차례로 나타나게 함
-        let showlists = ids.querySelectorAll('div');
-        showlists.forEach((item, index) => {
-            item.style.transition = 'none'; // 초기화
-            item.classList.remove('ups');
+        render('all');
+    }
 
-            setTimeout(() => {
-                setTimeout(() => {
-                    item.style.transition = '0.3s';
-                    item.classList.add('ups');
-                }, index * 100); // 100ms 간격으로 나타나도록 설정
-            }, 200);
+    // 프로젝트 필터 + 상세 모달
+    function initProjects() {
+        const filters = $('#projectFilters');
+        const grid = $('#projectGrid');
+        const modal = $('#projectModal');
+        const preview = $('#modalPreview');
+        const img = $('#modalImg');
+        const typeLabel = Object.fromEntries(projectTypes.map((t) => [t.id, t.label]));
+        let current = projects;
+        let index = 0;
+
+        filters.innerHTML = projectTypes.map((t, idx) => {
+            const n = t.id === 'all' ? projects.length : projects.filter((p) => p.type === t.id).length;
+            return `<button type="button" class="seg__btn" aria-pressed="${idx === 0}" data-type="${t.id}">
+                ${t.label}<span class="seg__count">${n}</span></button>`;
+        }).join('');
+
+        const render = (type) => {
+            current = type === 'all' ? projects : projects.filter((p) => p.type === type);
+            grid.innerHTML = current.map((p, i) => `
+                <article class="project-card" style="--i:${i}">
+                    <button type="button" class="project-card__btn" data-index="${i}" aria-haspopup="dialog">
+                        <span class="project-card__thumb">
+                            <img src="${p.thumb}" alt="${p.name} 메인 화면" loading="lazy" decoding="async">
+                        </span>
+                        <span class="project-card__body">
+                            <span class="badge badge--${p.type}">${typeLabel[p.type]}</span>
+                            <span class="project-card__title">${p.name}</span>
+                            <span class="project-card__summary">${p.summary}</span>
+                            <span class="tag-row">${p.tags.slice(0, 4).map((t) => `<span>#${t}</span>`).join('')}</span>
+                        </span>
+                    </button>
+                </article>`).join('');
+        };
+
+        filters.addEventListener('click', (e) => {
+            const btn = e.target.closest('.seg__btn');
+            if (!btn) return;
+            $$('.seg__btn', filters).forEach((b) => b.setAttribute('aria-pressed', b === btn));
+            render(btn.dataset.type);
+        });
+
+        const fill = (i) => {
+            index = (i + current.length) % current.length;
+            const p = current[index];
+            $('#modalType').textContent = typeLabel[p.type];
+            $('#modalType').className = `badge badge--${p.type}`;
+            $('#modalSummary').textContent = p.summary;
+            $('#modalTitle').textContent = p.name;
+            $('#modalTags').innerHTML = p.tags.map((t) => `<li>#${t}</li>`).join('');
+            $('#modalDesc').innerHTML = `<p>${p.text1}</p><p>${p.text2}</p>`;
+            $('#modalLink').href = p.link;
+            $('#modalCount').textContent = `${index + 1} / ${current.length}`;
+            $('#modalPrev').disabled = $('#modalNext').disabled = current.length < 2;
+
+            img.style.transition = 'none';
+            img.style.transform = 'translateY(0)';
+            img.src = p.preview;
+            img.alt = `${p.name} 전체 페이지 미리보기`;
+            preview.scrollTop = 0;
+        };
+
+        grid.addEventListener('click', (e) => {
+            const btn = e.target.closest('.project-card__btn');
+            if (!btn) return;
+            fill(Number(btn.dataset.index));
+            modal.showModal();
+        });
+
+        $('#modalPrev').addEventListener('click', () => fill(index - 1));
+        $('#modalNext').addEventListener('click', () => fill(index + 1));
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal || e.target.closest('[data-close]')) modal.close();
+        });
+        modal.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') fill(index - 1);
+            if (e.key === 'ArrowRight') fill(index + 1);
+        });
+
+        // 미리보기: 마우스를 올리면 긴 화면을 아래까지 자동 스크롤
+        if (canHover) {
+            const scrollPreview = (down) => {
+                const distance = img.offsetHeight - preview.clientHeight;
+                if (distance <= 0) return;
+                const sec = down ? Math.max(2, distance / 450) : 0.8;
+                img.style.transition = `transform ${sec}s ${down ? 'linear' : 'cubic-bezier(.2,.8,.2,1)'}`;
+                img.style.transform = `translateY(${down ? -distance : 0}px)`;
+            };
+            preview.addEventListener('mouseenter', () => scrollPreview(true));
+            preview.addEventListener('mouseleave', () => scrollPreview(false));
+            preview.addEventListener('focus', () => scrollPreview(true));
+            preview.addEventListener('blur', () => scrollPreview(false));
+        }
+
+        render('all');
+    }
+
+    // 스크롤 등장 애니메이션
+    function initReveal() {
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('is-visible');
+                io.unobserve(entry.target);
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        $$('.reveal').forEach((el) => io.observe(el));
+    }
+
+    // About 숫자 카운트업
+    function initCounters() {
+        $('#statProjects').dataset.count = projects.length;
+        $('#statSkills').dataset.count = skills.length;
+
+        const countUp = (el) => {
+            const end = Number(el.dataset.count);
+            if (reduceMotion) { el.textContent = end; return; }
+            const duration = 1200;
+            let start = null;
+            const step = (time) => {
+                if (start === null) start = time;
+                const p = Math.min((time - start) / duration, 1);
+                el.textContent = Math.round(easeOut(p) * end);
+                if (p < 1) requestAnimationFrame(step);
+            };
+            requestAnimationFrame(step);
+        };
+
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                io.unobserve(entry.target);
+                countUp(entry.target);
+            });
+        }, { threshold: 0.6 });
+        $$('[data-count]').forEach((el) => io.observe(el));
+    }
+
+    // 이메일 복사
+    function initCopy() {
+        const btn = $('#copyEmail');
+        const toast = $('#toast');
+        let timer;
+
+        const show = (msg) => {
+            toast.textContent = msg;
+            toast.classList.add('is-show');
+            clearTimeout(timer);
+            timer = setTimeout(() => toast.classList.remove('is-show'), 2200);
+        };
+
+        btn.addEventListener('click', async () => {
+            try {
+                await navigator.clipboard.writeText(btn.dataset.email);
+                show('이메일 주소를 복사했어요 📋');
+            } catch (e) {
+                show(btn.dataset.email);
+            }
         });
     }
-}
 
-//porject list
-// function projectShow(projectL){
-//     let projectBoxs = document.querySelectorAll('.projectB');
-//     let projectLs = document.querySelectorAll(`#${projectL}`);
-//     let projectName = document.querySelector('#projectName');
-//     let projectres = document.querySelector('#projectres');
-//     let closeProject = document.getElementById('closeProject');
-//     let projectListBoxs = document.querySelector('#projectListBoxs');
-//     let projectBox = document.getElementById('projectBox');
-//     console.log(projectL)
-
-//     closeProject.style.display='none';
-//     projectListBoxs.style.display='flex';
-//     projectBox.style.display='none';
-
-//     projectBoxs.forEach(item=>{
-//         item.style.opacity=0;
-//         setTimeout(() => {
-//             item.style.display='none'
-//         }, 100);
-//     })
-    
-
-//     projectLs.forEach(item=>{
-//         setTimeout(() => {
-//             item.style.display='block';
-//             setTimeout(() => {
-//                 item.style.opacity='1';
-//             }, 100);
-//         }, 200);
-//     });
-
-//     if(projectL=="all"){
-//         projectBoxs.forEach(item=>{
-//             setTimeout(() => {
-//                 item.style.display='block';
-//                 setTimeout(() => {
-//                     item.style.opacity='1';
-//                 }, 100);
-//             }, 200);
-//         });
-//         projectName.textContent='All Project';
-//         projectres.textContent='모든 프로젝트 리스트 입니다.';
-//     }else if(projectL=='personal'){
-//         projectName.textContent='Personal Project';
-//         projectres.textContent='개인 프로젝트 리스트 입니다.';
-//     }else if(projectL=='team'){
-//         projectName.textContent='Team Project';
-//         projectres.textContent='팀 프로젝트 리스트 입니다.';
-//     }else if(projectL=='mini'){
-//         projectName.textContent='Mini Project';
-//         projectres.textContent='작은 프로젝트들의 모음 입니다.';
-//     }
-
-//     $('#closeProject').click(()=>{
-//         projectShow('all');
-//     })
-
-    //porject Boxs
-//     window.projectGo=function(project){
-//         let closeProject = document.getElementById('closeProject');
-//         let projectListBoxs = document.querySelector('#projectListBoxs');
-//         let projectBox = document.getElementById('projectBox');
-//         let projectName = document.querySelector('#projectName');
-//         let projectres = document.querySelector('#projectres');
-//         closeProject.style.display='block'
-//         let projects = [
-//             { id:'moLmoL',name:'moLmoL',tags:'#HTML #CSS #Javascript #Jquery #PC',minit:'PC버전 / 향수 쇼핑몰',
-//                 text1:'다양한 종류의 향수를 판매하는 사이트 입니다.',text2:'javascript와 jquery를 주로 사용하였으며, 다양한 이벤트 구현에 중점을 두고 구현했습니다.css는 형지엘리트사 홈페이지를 참고 하였습니다.',
-//                 page:'https://hanyisy.github.io/MolMol/',gitpage:'https//ddd',
-//                 img:'./img/molmolMainpages.png'
-//             },
-//             { id:'woodin',name:'WOODIN',tags:'#HTML #CSS #Javascript #반응형 #Grid',minit:'반응형 / 카피 사이트',
-//                 text1:'가구 브랜드 우딘의 사이트를 카피 하였습니다.',text2:'grid를 활용한 레이아웃과 반응형을 중점으로 두고 제작한 사이트로, 주로 css와 janascript를 중심으로 제작되었습니다.',
-//                 page:'https://hanyisy.github.io/woodinCopypage/',gitpage:'https//ddd',
-//                 img:'./img/woodinPages.png'
-//             },
-//             { id:'onnuri',name:'OnNuri',tags:'#HTML #CSS #Javascript #Jquery #반응형 #팀프로젝트 #공공API #canvas',minit:'반응형 / 팀 프로젝트 / 한국 관광 사이트',
-//                 text1:'한국의 사계절과 관광지등을 소개하는 홈페이지 입니다.',text2:'팀 프로젝트로 제작된 사이트입니다. 공공api와 canvas, git등을 활용하였으며 반응형과 api활용등을 중점으로 제작되었습니다.',
-//                 page:'https://sonjongmin1.github.io/TouristWebsite/index.html',gitpage:'https//ddd',
-//                 img:'./img/onnuriPage.png'
-//             },
-//             { id:'neulNeuru',name:'NeulNeuru',tags:'#HTML #CSS #Javascript #React #공공API',minit:'PC버전 / 도서 판매사이트',
-//                 text1:'도서 판매 홈페이지 입니다.',text2:'React에 중점을 두고 제작한 사이트로 sass를 함께 사용하였습니다.',
-//                 page:'https://hanyisy.github.io/books/',gitpage:'https//ddd',
-//                 img:'./img/neulPage.png'
-//             },
-//             { id:'weather',name:'weather Page',tags:'#HTML #CSS #Javascript #공공API',minit:'PC버전 / 날씨 및 기온 검색 페이지',
-//                 text1:'현재 날씨 및 기온을 확인할 수 있는 페이지 입니다.',text2:'공공API를 활용하여 실시간 기상 및 기온을 확인할수 있도록 했습니다. 검색창에 원하는 지역을 영어로 작성하여 검색하면 그 지역의 날씨 및 기온도 확인이 가능합니다.',
-//                 page:'https://hanyisy.github.io/study/weatherPage.html',gitpage:'https//ddd',
-//                 img:'./img/weatherPages.png'
-//             },
-//             { id:'relog',name:'Relog',tags:'#HTML #CSS #Javascript #반응형',minit:'반응형 / 여행정보 공유 및 관광 사이트',
-//                 text1:'여행기록을 올리거나 관련 상품 또는 서비스를 구매할 수 있는 사이트 입니다.',text2:'로그인 및 회원가입 페이지를 구연하였으며, css와 JavaScript 중점으로 구현하였습니다.',
-//                 page:'https://hanyisy.github.io/reLog/',gitpage:'https//ddd',
-//                 img:'./img/relogPage.png'
-//             }
-//         ];
-
-//         projectListBoxs.style.display='none';
-//         projectBox.style.display='flex';
-//         projectBox.innerHTML='';
-
-//         projects.forEach(item =>{
-//             if(item.id == project){
-//                 let lDiv = document.createElement('div');
-//                 let limg = document.createElement('img');
-//                 lDiv.classList.add('imgflame');
-//                 limg.classList.add('scrollimg');
-//                 limg.src=item.img;
-
-//                 lDiv.addEventListener('mouseenter', () => {
-//                     const scrollHeight = limg.scrollHeight - lDiv.clientHeight;
-//                     limg.style.transform = `translateY(-${scrollHeight}px)`;
-//                 });
-        
-//                 lDiv.addEventListener('mouseleave', () => {
-//                     limg.style.transform = `translateY(0)`;
-//                 });
-
-//                 let rDiv = document.createElement('div');
-//                 let rTopDiv = document.createElement('div');
-//                 let rMidDiv = document.createElement('div');
-//                 let rBotDiv = document.createElement('div');
-
-//                 projectName.textContent=item.id;
-//                 projectres.textContent=item.tags;
-//                 rDiv.classList.add('rDiv');
-//                 rTopDiv.innerHTML=`<div>${item.name}</div><div>${item.minit}</div>`;
-//                 rMidDiv.innerHTML=`<div>${item.text1}</div><div>${item.text2}</div>`;
-//                 rBotDiv.innerHTML=`<div><a href="${item.page}" target="blank">홈페이지 ></div>`;
-                
-
-//                 projectBox.appendChild(lDiv);
-//                 projectBox.appendChild(rDiv);
-//                 lDiv.appendChild(limg);
-//                 rDiv.appendChild(rTopDiv);
-//                 rDiv.appendChild(rMidDiv);
-//                 rDiv.appendChild(rBotDiv);
-//             }
-//         })
-//     }
-
-// }
-
-// 모바일 버전
-let menuMo = document.querySelector('.menuMo');
-let barMo = document.querySelector('.barMo');
-let fBox = document.querySelector('.fBox');
-let sBox = document.querySelector('.sBox');
-document.getElementById('goMenu').addEventListener('click',()=>{
-    menuMo.style.display='block';
-    setTimeout(() => {
-        menuMo.style.opacity= '1';
-        barMo.classList.add('mov');
-    }, 100);
-});
-document.getElementById('outMenu').addEventListener('click',()=>{
-    barMo.classList.remove('mov');
-    menuMo.style.opacity= '0';
-    setTimeout(() => {
-        menuMo.style.display='none';
-    }, 300);
-});
-
-document.getElementById('goabout').addEventListener('click',()=>{
-    document.querySelector('.aboutBoxMo').style.height='18rem';
-    document.getElementById('goabout').style.display='none';
-    document.getElementById('outabout').style.display='block';
-    fBox.style.opacity='0';
-    sBox.style.display='block';
-    setTimeout(() => {
-        fBox.style.display='none';
-        sBox.style.opacity='1';
-    }, 100);
-});
-document.getElementById('outabout').addEventListener('click',()=>{
-    document.querySelector('.aboutBoxMo').style.height='0rem';
-    document.getElementById('goabout').style.display='block';
-    document.getElementById('outabout').style.display='none';
-    fBox.style.display='block';
-    sBox.style.opacity='0';
-    setTimeout(() => {
-        fBox.style.opacity='1';
-        sBox.style.display='none';
-    }, 100);
-});
-
-//click keyword
-
-
-function showm(id) {
-    let skillbtn = document.querySelectorAll('.skillNavm > div'); // 상단 버튼들
-    let skillList = document.querySelectorAll('.skillListm > div'); // 전체 리스트
-    let ids = document.getElementById(id); // 클릭한 리스트의 ID 가져오기
-
-    // 모든 리스트에서 'ons' 제거하여 숨김 처리
-    skillList.forEach(item => {
-        item.classList.remove('ons');
-        item.querySelectorAll('div').forEach(skill => {
-            skill.classList.remove('ups'); // 모든 리스트 아이템 초기화
-        });
-    });
-
-
-
-    // 모든 버튼에서 'ons' 제거 후 클릭한 버튼에 추가
-    skillbtn.forEach(item => item.classList.remove("ons"));
-    document.querySelector(`.skillNavm > div[onclick="showm('${id}')"]`).classList.add("ons");
-
-
-    // 선택된 리스트만 보이도록 설정
-    if (ids) {
-        ids.classList.add("ons"); // 리스트 보이기
-
-        // 리스트 안의 개별 항목들을 차례로 나타나게 함
-        let showlists = ids.querySelectorAll('div');
-        showlists.forEach((item, index) => {
-            item.style.transition = 'none'; // 초기화
-            item.classList.remove('ups');
-
-            setTimeout(() => {
-                setTimeout(() => {
-                    item.style.transition = '0.3s';
-                    item.classList.add('ups');
-                }, index * 100); // 100ms 간격으로 나타나도록 설정
-            }, 200);
-        });
-    }
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    let card = document.querySelectorAll('.inBox');
-        
-    card.forEach( item => {
-        item.addEventListener('click', () => {
-            item.classList.toggle('flipped'); // 클래스를 추가/제거하여 뒤집기
-        });
-    })
-});
-
-
-// 방명록 쓰러가기
-let gowrite = document.querySelector('.gowrite');
-gowrite.addEventListener('click',()=>{
-    document.querySelector('.guestoutbox').style.display='flex';
-});
-
-//글쓰기창 보이기+숨기기기
-document.querySelector(".writeB").addEventListener("click", function () {
-    let guestoutbox = document.querySelector(".guestoutbox");
-
-    if (window.innerWidth <= 768) {
-        guestoutbox.style.display = "none";
-    }
-});
-
-document.getElementById('closeWrite').addEventListener("click",()=>{
-    document.querySelector(".guestoutbox").style.display='none'
-})
-
-//화면 크기에 따른 처리
-window.addEventListener("resize", function () {
-    let guestoutbox = document.querySelector(".guestoutbox");
-
-    if (window.innerWidth > 768) {
-        guestoutbox.style.display = "block"; // 블록을 보이게 함
-    } else {
-        guestoutbox.style.display = "none"; // 다시 숨김
-    }
-});
+    initIntro();
+    initScroll();
+    initNav();
+    initTheme();
+    initTyping();
+    initSkills();
+    initProjects();
+    initReveal();
+    initCounters();
+    initCopy();
+})();
