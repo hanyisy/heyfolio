@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="description" content="밝고, 성실하게! 프론트엔드 개발자 손혜인의 포트폴리오, HeyFolio">
-    <meta name="theme-color" content="#eef2f4">
+    <meta name="description" content="즐겁게 고민하고 성실하게 완성하는 프론트엔드 개발자 손혜인의 포트폴리오, HeyFolio">
+    <meta name="theme-color" content="#f5f3ee">
     <meta property="og:title" content="HeyFolio · 손혜인 포트폴리오">
-    <meta property="og:description" content="밝고, 성실하게! 프론트엔드 개발자 손혜인의 포트폴리오">
+    <meta property="og:description" content="즐겁게 고민하고 성실하게 완성하는 프론트엔드 개발자 손혜인의 포트폴리오">
     <title>HeyFolio · 손혜인 포트폴리오</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐻</text></svg>">
     <script>
@@ -24,6 +24,11 @@
             setTimeout(function () { root.classList.add('intro-seen'); }, 6000);
         })();
     </script>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap">
     <link rel="stylesheet" href="./css/heyfolio.css">
     <script src="./js/data.js" defer></script>
     <script src="./js/heyfolio.js" defer></script>
@@ -34,32 +39,34 @@
     <!-- 인트로 -->
     <div class="intro" id="intro" aria-hidden="true">
         <div class="intro__inner">
-            <img src="./img/gomH.png" alt="" class="intro__gom">
-            <p class="intro__t1">밝고, 성실하게!</p>
-            <p class="intro__t2">Welcome to my <b>HeyFolio!</b></p>
-            <p class="intro__count">LOADING <span id="introCount">0</span>%</p>
+            <p class="intro__mark">HeyFolio</p>
+            <p class="intro__slogan">밝고, 성실하게.</p>
+            <div class="intro__line"><span id="introLine"></span></div>
+            <p class="intro__count"><span id="introCount">0</span>%</p>
         </div>
     </div>
 
     <!-- 헤더 -->
     <header class="header" id="header">
-        <a href="#home" class="header__logo"><img src="./img/LogoBlack.png" alt="HeyFolio 홈으로"></a>
-        <nav class="nav" id="nav" aria-label="주요 메뉴">
-            <a href="#home">Home</a>
-            <a href="#about">About</a>
-            <a href="#skill">Skill</a>
-            <a href="#project">Project</a>
-            <a href="#guestbook">Guestbook</a>
-            <a href="#contact">Contact</a>
-        </nav>
-        <div class="header__actions">
-            <button type="button" class="icon-btn" id="themeToggle" aria-label="다크 모드로 전환">
-                <svg class="icon-moon" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
-                <svg class="icon-sun" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></g></svg>
-            </button>
-            <button type="button" class="icon-btn menu-btn" id="menuToggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="nav">
-                <span></span><span></span><span></span>
-            </button>
+        <div class="header__inner">
+            <a href="#home" class="wordmark" aria-label="HeyFolio 홈으로">HeyFolio</a>
+            <nav class="nav" id="nav" aria-label="주요 메뉴">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#skill">Skill</a>
+                <a href="#project">Project</a>
+                <a href="#guestbook">Guestbook</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <div class="header__actions">
+                <button type="button" class="icon-btn" id="themeToggle" aria-label="다크 모드로 전환">
+                    <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+                    <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></g></svg>
+                </button>
+                <button type="button" class="icon-btn menu-btn" id="menuToggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="nav">
+                    <span></span><span></span>
+                </button>
+            </div>
         </div>
         <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
     </header>
@@ -67,60 +74,68 @@
     <main id="main">
         <!-- Home -->
         <section class="hero" id="home">
-            <div class="container hero__grid">
-                <div class="hero__text">
-                    <p class="eyebrow">Frontend Developer · Son Hein</p>
-                    <h1 class="hero__title">
-                        <span class="hand">즐겁게</span> 고민하고<br>
-                        성실하게 완성하는<br>
-                        <em>프론트엔드 개발자</em> <strong>손혜인</strong>입니다.
-                    </h1>
-                    <p class="hero__lead">시각디자인을 공부한 감각으로, 보기 좋고 쓰기 편한 화면을 만듭니다.</p>
-                    <p class="hero__keyword">
-                        <span>저를 한 단어로 표현하면</span>
-                        <span class="typing" id="typing" aria-hidden="true">#성실</span>
-                        <span class="sr-only">#성실 #책임감 #적극적 #활발한 #긍정적</span>
-                    </p>
-                    <div class="hero__cta">
-                        <a href="#project" class="btn btn--primary">프로젝트 보기 <span aria-hidden="true">→</span></a>
-                        <a href="#contact" class="btn btn--ghost">연락하기</a>
-                    </div>
+            <div class="container hero__inner">
+                <div class="hero__meta mono">
+                    <span>(Portfolio 2025)</span>
+                    <span class="hero__status"><i></i>새로운 기회를 기다리는 중</span>
                 </div>
-                <div class="hero__visual">
-                    <div class="hero__card">
-                        <div class="hero__screen">
-                            <img src="./img/helloGom.gif" alt="손을 흔들며 인사하는 곰 캐릭터">
-                        </div>
-                    </div>
-                    <span class="sticker sticker--hello">Hello! 👋</span>
-                    <span class="sticker sticker--role">Since 2025</span>
-                </div>
-            </div>
-            <a href="#about" class="scroll-cue" aria-label="About 섹션으로 이동"><span></span></a>
-        </section>
 
-        <div class="marquee-wrap" aria-hidden="true">
-        <div class="marquee">
-            <div class="marquee__track">
-                <div class="marquee__group">
-                    <span>밝고, 성실하게!</span><i>✦</i><span>HeyFolio</span><i>✦</i><span>Frontend Developer</span><i>✦</i><span>Son Hein</span><i>✦</i>
+                <div class="hero__head">
+                    <p class="hero__hello">Hey, I'm <em>Hein</em> —</p>
+                    <h1 class="hero__title">
+                        즐겁게 고민하고,<br>
+                        성실하게 완성하는<br>
+                        <span class="hero__role">프론트엔드 개발자</span>입니다.
+                    </h1>
                 </div>
-                <div class="marquee__group">
-                    <span>밝고, 성실하게!</span><i>✦</i><span>HeyFolio</span><i>✦</i><span>Frontend Developer</span><i>✦</i><span>Son Hein</span><i>✦</i>
+
+                <div class="hero__bottom">
+                    <button type="button" class="bear bear--hero" aria-label="곰 캐릭터에게 인사하기">
+                        <span class="bear__bubble" aria-live="polite">안녕하세요!</span>
+                        <span class="bear__peek"><svg class="bear__svg" viewBox="0 0 200 148" aria-hidden="true">
+                            <g class="bear__ears">
+                                <rect x="30" y="14" width="40" height="42" rx="13" transform="rotate(-24 50 35)"/>
+                                <rect x="40" y="24" width="20" height="22" rx="7" transform="rotate(-24 50 35)" class="bear__pink"/>
+                                <rect x="130" y="14" width="40" height="42" rx="13" transform="rotate(24 150 35)"/>
+                                <rect x="140" y="24" width="20" height="22" rx="7" transform="rotate(24 150 35)" class="bear__pink"/>
+                            </g>
+                            <path class="bear__head" d="M8 148 V128 C8 66 46 30 100 30 C154 30 192 66 192 128 V148"/>
+                            <rect x="38" y="90" width="28" height="17" rx="6" class="bear__pink bear__blush"/>
+                            <rect x="134" y="90" width="28" height="17" rx="6" class="bear__pink bear__blush"/>
+                            <g class="bear__eyes">
+                                <g class="bear__pupils">
+                                    <ellipse cx="70" cy="78" rx="7" ry="10"/>
+                                    <ellipse cx="130" cy="78" rx="7" ry="10"/>
+                                    <circle cx="72" cy="73" r="2.4" class="bear__shine"/>
+                                    <circle cx="132" cy="73" r="2.4" class="bear__shine"/>
+                                </g>
+                            </g>
+                            <rect x="92" y="80" width="16" height="6" rx="2"/>
+                            <path class="bear__mouth" d="M80 96 C84 106 112 106 120 94"/>
+                            <path class="bear__tooth" d="M108 101 l1 6 l6 -1.5 l-1 -6"/>
+                        </svg></span>
+                    </button>
+
+                    <dl class="hero__facts">
+                        <div><dt class="mono">Name</dt><dd>손혜인 · Son Hein</dd></div>
+                        <div><dt class="mono">Background</dt><dd>시각디자인 → 풀스택 개발</dd></div>
+                        <div><dt class="mono">Focus</dt><dd>보기 좋고 쓰기 편한 화면</dd></div>
+                    </dl>
+                    <div class="hero__cta">
+                        <a href="#project" class="btn btn--primary">프로젝트 보기 <span class="btn__arrow" aria-hidden="true">↘</span></a>
+                        <a href="#contact" class="btn btn--ghost">연락하기 <span class="btn__arrow" aria-hidden="true">↗</span></a>
+                    </div>
                 </div>
             </div>
-        </div>
-        </div>
+        </section>
 
         <!-- About -->
         <section class="section" id="about">
             <div class="container">
                 <header class="section__head reveal">
-                    <div>
-                        <p class="eyebrow">01 · About</p>
-                        <h2>About Me</h2>
-                    </div>
-                    <p class="section__desc">디자인고에서 시각디자인을, 학원에서 풀스택 개발을 배웠어요. 디자인과 개발 사이를 잇는 개발자가 되고 싶어요.</p>
+                    <p class="section__index mono">(01) About</p>
+                    <h2 class="section__title">About <em>me</em></h2>
+                    <p class="section__desc">시각디자인을 전공하고 풀스택 개발 과정을 공부했습니다. 디자인과 개발 사이를 잇는 개발자를 지향합니다.</p>
                 </header>
 
                 <div class="bento">
@@ -128,46 +143,46 @@
                         <img src="./img/myImg.png" alt="손혜인 프로필 일러스트" class="profile__img">
                         <div class="profile__body">
                             <h3 class="profile__name">손혜인 <span>Son Hein</span></h3>
-                            <ul class="tags">
-                                <li>#성실</li><li>#책임감</li><li>#적극적</li><li>#활발한</li><li>#긍정적</li>
+                            <ul class="keywords">
+                                <li>성실</li><li>책임감</li><li>적극적</li><li>활발함</li><li>긍정적</li>
                             </ul>
                             <dl class="info">
-                                <div><dt>Birth Day</dt><dd>2005.07.08</dd></div>
-                                <div><dt>Phone</dt><dd><a href="tel:01075955808">010.7595.5808</a></dd></div>
-                                <div><dt>E-mail</dt><dd><a href="mailto:heineyee@naver.com">heineyee@naver.com</a></dd></div>
+                                <div><dt class="mono">Birth</dt><dd>2005.07.08</dd></div>
+                                <div><dt class="mono">Phone</dt><dd><a href="tel:01075955808">010.7595.5808</a></dd></div>
+                                <div><dt class="mono">E-mail</dt><dd><a href="mailto:heineyee@naver.com">heineyee@naver.com</a></dd></div>
                             </dl>
                         </div>
                     </article>
 
-                    <article class="card stats reveal" style="--d:.1s">
-                        <div><strong id="statProjects" data-count="8">8</strong><span>Projects</span></div>
-                        <div><strong id="statSkills" data-count="12">12</strong><span>Skills</span></div>
-                        <div><strong data-count="4">4</strong><span>Certificates</span></div>
+                    <article class="card stats reveal" style="--d:.08s">
+                        <div><strong id="statProjects" data-count="8">8</strong><span class="mono">Projects</span></div>
+                        <div><strong id="statSkills" data-count="12">12</strong><span class="mono">Skills</span></div>
+                        <div><strong data-count="4">4</strong><span class="mono">Certificates</span></div>
                     </article>
 
-                    <article class="card cert reveal" style="--d:.15s">
-                        <h3 class="card__title">Certifications</h3>
+                    <article class="card cert reveal" style="--d:.12s">
+                        <h3 class="card__title mono">Certifications</h3>
                         <ul class="timeline">
-                            <li><span class="date">2023.07</span>GTQ, GTQi</li>
-                            <li><span class="date">2023.07</span>컴퓨터그래픽스운용기능사</li>
-                            <li><span class="date">2023.06</span>OA Master</li>
+                            <li><span class="date mono">2023.07</span>GTQ, GTQi</li>
+                            <li><span class="date mono">2023.07</span>컴퓨터그래픽스운용기능사</li>
+                            <li><span class="date mono">2023.06</span>OA Master</li>
                         </ul>
                     </article>
 
-                    <article class="card edu reveal" style="--d:.2s">
-                        <h3 class="card__title">Education</h3>
+                    <article class="card edu reveal" style="--d:.16s">
+                        <h3 class="card__title mono">Education</h3>
                         <ul class="timeline">
-                            <li><span class="date">2024.10 – 2025.04</span>라인컴퓨터아트학원<small>풀스택 개발자 과정</small></li>
-                            <li><span class="date">2021.03 – 2024.02</span>홍익디자인고등학교<small>시각디자인과</small></li>
+                            <li><span class="date mono">2024.10 — 2025.04</span>라인컴퓨터아트학원<small>풀스택 개발자 과정</small></li>
+                            <li><span class="date mono">2021.03 — 2024.02</span>홍익디자인고등학교<small>시각디자인과</small></li>
                         </ul>
                     </article>
 
-                    <a class="card archive reveal" style="--d:.25s" href="https://github.com/hanyisy" target="_blank" rel="noopener">
+                    <a class="card archive reveal" style="--d:.2s" href="https://github.com/hanyisy" target="_blank" rel="noopener">
                         <span class="archive__icon"><img src="./img/git.png" alt=""></span>
                         <span class="archive__text">
-                            <span class="archive__label">Archiving</span>
+                            <span class="archive__label mono">Archive</span>
                             <span class="archive__title">GitHub</span>
-                            <span class="archive__desc">프로젝트 기록 및 코드</span>
+                            <span class="archive__desc">프로젝트 기록과 코드</span>
                         </span>
                         <span class="archive__arrow" aria-hidden="true">↗</span>
                     </a>
@@ -179,11 +194,9 @@
         <section class="section section--tint" id="skill">
             <div class="container">
                 <header class="section__head reveal">
-                    <div>
-                        <p class="eyebrow">02 · Skill</p>
-                        <h2>Skill</h2>
-                    </div>
-                    <p class="section__desc">디자인 툴부터 프론트엔드, 백엔드까지 직접 써 본 기술들이에요.</p>
+                    <p class="section__index mono">(02) Skill</p>
+                    <h2 class="section__title">Skills <em>&amp; tools</em></h2>
+                    <p class="section__desc">디자인 툴부터 프론트엔드, 백엔드까지 직접 사용해 본 기술입니다.</p>
                 </header>
                 <div class="seg reveal" role="tablist" aria-label="스킬 분류" id="skillTabs"></div>
                 <div class="skill-grid" id="skillGrid" role="tabpanel"></div>
@@ -194,18 +207,16 @@
         <section class="section" id="project">
             <div class="container">
                 <header class="section__head reveal">
-                    <div>
-                        <p class="eyebrow">03 · Project</p>
-                        <h2>Project</h2>
-                    </div>
-                    <p class="section__desc">개인·팀 프로젝트로 만든 작업물이에요. 카드를 누르면 전체 화면을 볼 수 있어요.</p>
+                    <p class="section__index mono">(03) Project</p>
+                    <h2 class="section__title">Selected <em>work</em></h2>
+                    <p class="section__desc">개인·팀 프로젝트로 만든 작업물입니다. 카드를 선택하면 전체 화면을 볼 수 있습니다.</p>
                 </header>
                 <div class="seg reveal" role="group" aria-label="프로젝트 분류" id="projectFilters"></div>
                 <div class="project-grid" id="projectGrid"></div>
-                <div class="carousel-status" aria-hidden="true">
+                <div class="carousel-status mono" aria-hidden="true">
                     <span id="projectCount">1 / 8</span>
                     <span class="carousel-status__bar"><i id="projectBar"></i></span>
-                    <span>밀어서 보기 →</span>
+                    <span>Swipe →</span>
                 </div>
             </div>
         </section>
@@ -214,11 +225,9 @@
         <section class="section section--tint" id="guestbook">
             <div class="container">
                 <header class="section__head reveal">
-                    <div>
-                        <p class="eyebrow">04 · Guestbook</p>
-                        <h2>Guestbook</h2>
-                    </div>
-                    <p class="section__desc">다녀가신 흔적을 남겨주세요. 따뜻한 한마디가 큰 힘이 돼요!</p>
+                    <p class="section__index mono">(04) Guestbook</p>
+                    <h2 class="section__title">Guest<em>book</em></h2>
+                    <p class="section__desc">다녀가신 흔적을 남겨주세요. 따뜻한 한마디가 큰 힘이 됩니다.</p>
                 </header>
                 <div class="card guest reveal">
                     <iframe src="https://storage.googleapis.com/guest_border/index4.html" title="방명록" loading="lazy"></iframe>
@@ -227,20 +236,19 @@
         </section>
 
         <!-- Contact -->
-        <section class="section" id="contact">
+        <section class="section contact" id="contact">
             <div class="container">
-                <div class="card contact reveal">
-                    <div class="contact__text">
-                        <p class="eyebrow">05 · Contact</p>
-                        <h2>함께 일할 기회를<br>기다리고 있어요!</h2>
-                        <p>끝까지 봐주셔서 감사합니다. 새로운 기회와 협업은 언제나 환영이에요. 궁금한 점이나 함께할 프로젝트가 있다면 편하게 연락 주세요.</p>
+                <p class="section__index mono reveal">(05) Contact</p>
+                <h2 class="contact__title reveal">Let's work <em>together.</em></h2>
+                <div class="contact__grid">
+                    <p class="contact__text reveal">끝까지 봐주셔서 감사합니다. 새로운 기회와 협업은 언제나 환영합니다. 궁금한 점이나 함께할 프로젝트가 있다면 편하게 연락 주세요.</p>
+                    <div class="contact__links reveal" style="--d:.1s">
+                        <a class="contact__mail" href="mailto:heineyee@naver.com">heineyee@naver.com <span aria-hidden="true">↗</span></a>
                         <div class="contact__actions">
-                            <a class="btn btn--primary" href="mailto:heineyee@naver.com">📩 heineyee@naver.com</a>
                             <button type="button" class="btn btn--ghost" id="copyEmail" data-email="heineyee@naver.com">이메일 복사</button>
-                            <a class="btn btn--ghost" href="https://github.com/hanyisy" target="_blank" rel="noopener">GitHub ↗</a>
+                            <a class="btn btn--ghost" href="https://github.com/hanyisy" target="_blank" rel="noopener">GitHub <span class="btn__arrow" aria-hidden="true">↗</span></a>
                         </div>
                     </div>
-                    <img src="./img/gom.png" alt="" class="contact__gom">
                 </div>
             </div>
         </section>
@@ -248,12 +256,38 @@
 
     <footer class="footer">
         <div class="container footer__inner">
-            <p>상업적 목적이 아닌 개인 포트폴리오용으로 제작되었습니다.<br>© 2025 Son_He_in. All Rights Reserved.</p>
+            <button type="button" class="bear bear--footer" aria-label="곰 캐릭터에게 인사하기">
+                <span class="bear__bubble" aria-live="polite">또 만나요!</span>
+                <span class="bear__peek"><svg class="bear__svg" viewBox="0 0 200 148" aria-hidden="true">
+                    <g class="bear__ears">
+                        <rect x="30" y="14" width="40" height="42" rx="13" transform="rotate(-24 50 35)"/>
+                        <rect x="40" y="24" width="20" height="22" rx="7" transform="rotate(-24 50 35)" class="bear__pink"/>
+                        <rect x="130" y="14" width="40" height="42" rx="13" transform="rotate(24 150 35)"/>
+                        <rect x="140" y="24" width="20" height="22" rx="7" transform="rotate(24 150 35)" class="bear__pink"/>
+                    </g>
+                    <path class="bear__head" d="M8 148 V128 C8 66 46 30 100 30 C154 30 192 66 192 128 V148"/>
+                    <rect x="38" y="90" width="28" height="17" rx="6" class="bear__pink bear__blush"/>
+                    <rect x="134" y="90" width="28" height="17" rx="6" class="bear__pink bear__blush"/>
+                    <g class="bear__eyes">
+                        <g class="bear__pupils">
+                            <ellipse cx="70" cy="78" rx="7" ry="10"/>
+                            <ellipse cx="130" cy="78" rx="7" ry="10"/>
+                            <circle cx="72" cy="73" r="2.4" class="bear__shine"/>
+                            <circle cx="132" cy="73" r="2.4" class="bear__shine"/>
+                        </g>
+                    </g>
+                    <rect x="92" y="80" width="16" height="6" rx="2"/>
+                    <path class="bear__mouth" d="M80 96 C84 106 112 106 120 94"/>
+                    <path class="bear__tooth" d="M108 101 l1 6 l6 -1.5 l-1 -6"/>
+                </svg></span>
+            </button>
+            <p><span class="mono">© 2025 Son Hein</span> — 상업적 목적이 아닌 개인 포트폴리오용으로 제작되었습니다.</p>
             <a href="./v1/index.html">이전 버전(v1) 보기 →</a>
         </div>
     </footer>
 
     <button type="button" class="to-top" id="toTop" aria-label="맨 위로 가기">↑</button>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
     <!-- 모바일 하단 탭바 -->
     <nav class="tabbar" id="tabbar" aria-label="모바일 메뉴">
@@ -278,7 +312,6 @@
             <span>Contact</span>
         </a>
     </nav>
-    <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
     <!-- 프로젝트 상세 모달 -->
     <dialog class="modal" id="projectModal" aria-labelledby="modalTitle">
@@ -286,20 +319,20 @@
             <button type="button" class="modal__close" data-close aria-label="닫기">✕</button>
             <div class="modal__preview" id="modalPreview" tabindex="0" aria-label="전체 페이지 미리보기">
                 <img id="modalImg" src="" alt="">
-                <span class="modal__hint">마우스를 올리면 전체 페이지가 스크롤돼요</span>
+                <span class="modal__hint mono">Hover to scroll ↓</span>
             </div>
             <div class="modal__body">
-                <p class="modal__meta"><span class="badge" id="modalType"></span><span id="modalSummary"></span></p>
+                <p class="modal__meta"><span class="badge mono" id="modalType"></span><span id="modalSummary"></span></p>
                 <h3 id="modalTitle"></h3>
-                <ul class="tags tags--left" id="modalTags"></ul>
+                <ul class="chips mono" id="modalTags"></ul>
                 <div class="modal__desc" id="modalDesc"></div>
                 <div class="modal__actions">
-                    <a class="btn btn--primary" id="modalLink" href="#" target="_blank" rel="noopener">사이트 바로가기 ↗</a>
+                    <a class="btn btn--primary" id="modalLink" href="#" target="_blank" rel="noopener">사이트 바로가기 <span class="btn__arrow" aria-hidden="true">↗</span></a>
                 </div>
-                <div class="modal__nav">
-                    <button type="button" class="modal__navbtn" id="modalPrev">← 이전</button>
+                <div class="modal__nav mono">
+                    <button type="button" class="modal__navbtn" id="modalPrev">← Prev</button>
                     <span id="modalCount"></span>
-                    <button type="button" class="modal__navbtn" id="modalNext">다음 →</button>
+                    <button type="button" class="modal__navbtn" id="modalNext">Next →</button>
                 </div>
             </div>
         </div>

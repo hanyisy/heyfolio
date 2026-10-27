@@ -11,7 +11,7 @@
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const canHover = window.matchMedia('(hover: hover)').matches;
     const easeOut = (t) => 1 - Math.pow(1 - t, 3);
-    const { keywords, skillGroups, skills, projectTypes, projects } = HEYFOLIO;
+    const { bearTalk, skillGroups, skills, projectTypes, projects } = HEYFOLIO;
 
     // 인트로 로딩 화면 (세션당 한 번만 노출)
     function initIntro() {
@@ -20,6 +20,7 @@
         if (root.classList.contains('intro-seen')) { intro.remove(); return; }
 
         const count = $('#introCount');
+        const line = $('#introLine');
         const duration = 1600;
         let start = null;
         let finished = false;
@@ -28,6 +29,7 @@
             if (finished) return;
             finished = true;
             count.textContent = '100';
+            line.style.transform = 'scaleX(1)';
             intro.classList.add('is-done');
             try { sessionStorage.setItem('heyfolio-intro', '1'); } catch (e) {}
             setTimeout(() => {
@@ -41,6 +43,7 @@
             if (start === null) start = time;
             const p = Math.min((time - start) / duration, 1);
             count.textContent = Math.round(easeOut(p) * 100);
+            line.style.transform = `scaleX(${easeOut(p)})`;
             if (p < 1) requestAnimationFrame(tick);
             else setTimeout(finish, 400);
         };
@@ -135,39 +138,47 @@
         });
     }
 
-    // 히어로 키워드 타이핑
-    function initTyping() {
-        const el = $('#typing');
-        if (!el) return;
-        let i = 0;
+    // 곰 캐릭터: 눈이 포인터를 따라가고, 누르면 말을 걸어요
+    function initBear() {
+        const bears = $$('.bear');
+        if (!bears.length) return;
 
-        if (reduceMotion) {
-            setInterval(() => {
-                i = (i + 1) % keywords.length;
-                el.textContent = `#${keywords[i]}`;
-            }, 2200);
-            return;
-        }
-
-        let text = '';
-        let deleting = false;
-        const loop = () => {
-            const word = `#${keywords[i]}`;
-            text = deleting ? word.slice(0, text.length - 1) : word.slice(0, text.length + 1);
-            el.textContent = text;
-
-            let delay = deleting ? 70 : 150;
-            if (!deleting && text === word) {
-                delay = 1600;
-                deleting = true;
-            } else if (deleting && text === '') {
-                deleting = false;
-                i = (i + 1) % keywords.length;
-                delay = 300;
-            }
-            setTimeout(loop, delay);
+        let pointer = null;
+        let ticking = false;
+        const look = () => {
+            ticking = false;
+            bears.forEach((bear) => {
+                const r = bear.getBoundingClientRect();
+                const dx = pointer.x - (r.left + r.width / 2);
+                const dy = pointer.y - (r.top + r.height * 0.6);
+                const dist = Math.hypot(dx, dy) || 1;
+                const reach = Math.min(dist / 320, 1) * 4.5;
+                bear.style.setProperty('--px', `${((dx / dist) * reach).toFixed(2)}px`);
+                bear.style.setProperty('--py', `${((dy / dist) * reach).toFixed(2)}px`);
+            });
         };
-        loop();
+        window.addEventListener('pointermove', (e) => {
+            pointer = { x: e.clientX, y: e.clientY };
+            if (!ticking) {
+                ticking = true;
+                requestAnimationFrame(look);
+            }
+        }, { passive: true });
+
+        let line = 0;
+        bears.forEach((bear) => {
+            const bubble = $('.bear__bubble', bear);
+            let timer;
+            bear.addEventListener('click', () => {
+                bubble.textContent = bearTalk[line];
+                line = (line + 1) % bearTalk.length;
+                bear.classList.remove('is-boop');
+                void bear.offsetWidth; // 애니메이션 다시 시작
+                bear.classList.add('is-boop', 'is-talking');
+                clearTimeout(timer);
+                timer = setTimeout(() => bear.classList.remove('is-talking'), 1800);
+            });
+        });
     }
 
     // 스킬 탭
@@ -270,10 +281,13 @@
                             <img src="${p.thumb}" alt="${p.name} 메인 화면" loading="lazy" decoding="async">
                         </span>
                         <span class="project-card__body">
-                            <span class="badge badge--${p.type}">${typeLabel[p.type]}</span>
+                            <span class="project-card__top">
+                                <span class="mono">${String(i + 1).padStart(2, '0')}</span>
+                                <span class="badge badge--${p.type}">${typeLabel[p.type]}</span>
+                            </span>
                             <span class="project-card__title">${p.name}</span>
                             <span class="project-card__summary">${p.summary}</span>
-                            <span class="tag-row">${p.tags.slice(0, 4).map((t) => `<span>#${t}</span>`).join('')}</span>
+                            <span class="tag-row">${p.tags.slice(0, 4).join(' · ')}</span>
                         </span>
                     </button>
                 </article>`).join('');
@@ -316,7 +330,7 @@
             $('#modalType').className = `badge badge--${p.type}`;
             $('#modalSummary').textContent = p.summary;
             $('#modalTitle').textContent = p.name;
-            $('#modalTags').innerHTML = p.tags.map((t) => `<li>#${t}</li>`).join('');
+            $('#modalTags').innerHTML = p.tags.map((t) => `<li>${t}</li>`).join('');
             $('#modalDesc').innerHTML = `<p>${p.text1}</p><p>${p.text2}</p>`;
             $('#modalLink').href = p.link;
             $('#modalCount').textContent = `${index + 1} / ${current.length}`;
@@ -432,7 +446,7 @@
     initScroll();
     initNav();
     initTheme();
-    initTyping();
+    initBear();
     initSkills();
     initProjects();
     initReveal();
